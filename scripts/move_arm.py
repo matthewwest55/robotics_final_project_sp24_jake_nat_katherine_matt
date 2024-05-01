@@ -28,6 +28,16 @@ class MoveArm(object):
         # self.move_group_arm.go([0,0,0,0], wait=True)
         print("ready")
 
+    def draw_line(self):
+        # In this function, we are going to have to pay mind to
+        # moving multiple joints at once
+        # Example: If the arm is high and begins moving down,
+        # it needs to extend a bit to keep touching the board
+        
+        # Maybe we can make the joints a function of one another?
+        
+        pass
+
     def reset_arm(self):
         # left/right, whole arm up/down, forearm up/down, gripper angle
         self.move_group_arm.go([0,math.radians(-20),math.radians(-10),0], wait=True)
