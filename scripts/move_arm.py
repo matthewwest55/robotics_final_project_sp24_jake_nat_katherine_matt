@@ -8,7 +8,7 @@ import math
 class MoveArm(object):
     def __init__(self):
         # initialize this node (get rid of this later)
-        rospy.init_node('move_arm')
+        # rospy.init_node('move_arm')
 
         # the interface to the group of joints making up the turtlebot3
         # openmanipulator arm
@@ -38,7 +38,7 @@ class MoveArm(object):
         
         pass
 
-    def reset_arm(self):
+    def reset_arm(self):    
         # left/right, whole arm up/down, forearm up/down, gripper angle
         self.move_group_arm.go([0,math.radians(-20),math.radians(-10),0], wait=True)
         self.move_group_arm.stop()
