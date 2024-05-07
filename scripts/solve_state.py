@@ -10,7 +10,7 @@ if __name__ == '__main__':
     # Init our robot controller objects
     arm_commands_node = MoveArm()
 
-    # arm_commands_node.pick_up_object()
+    arm_commands_node.draw_line()
     # arm_commands_node.drop_object()
     # arm_commands_node.open_gripper()
 

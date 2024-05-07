@@ -5,6 +5,9 @@ import rospy
 import moveit_commander
 import math
 
+RIGHT = math.radians(-90)
+LEFT = math.radians(90)
+
 class MoveArm(object):
     def __init__(self):
         # initialize this node (get rid of this later)
@@ -35,22 +38,49 @@ class MoveArm(object):
         # it needs to extend a bit to keep touching the board
         
         # Maybe we can make the joints a function of one another?
+
+        # I'm thinking about making variables to this class 
+        # that allow me to track the current arm position
+        # Using that information, we can move the robot arm slowly
+        # and make movement a function of different joint positions
         
-        pass
+        # self.arm_down()
+        # rospy.sleep(5)
+        # self.arm_back()
 
-    def reset_arm(self):    
+        # Might also need to make the gripper angle a function of where the arm is
+        # Alright, need to figure out the proportions we should be using
+
+        for i in range(-10, 0, 2):
+            # self.move_group_arm.go([RIGHT, math.radians(2*i), math.radians((5*i)+50), 0], wait=True)
+            # self.move_group_arm.go([RIGHT, math.radians(-20), math.radians((5*i)+50), 0], wait=True)
+            self.move_group_arm.go([RIGHT, math.radians(-2*i), math.radians(-10), 0], wait=True)
+            rospy.sleep(2)
+
+        self.move_group_arm.stop()
+
+
+    def reset_arm(self):
         # left/right, whole arm up/down, forearm up/down, gripper angle
-        self.move_group_arm.go([0,math.radians(-20),math.radians(-10),0], wait=True)
+        self.move_group_arm.go([RIGHT, math.radians(-20), math.radians(-10), 0], wait=True)
+        self.move_group_arm.stop()
+        self.whole_arm = math.radians(-20)
+        self.forearm = math.radians(-10)
+
+    def arm_up(self):
+        self.move_group_arm.go([RIGHT, math.radians(-20), math.radians(-50), 0], wait=True)
+        self.move_group_arm.stop()
+        self.whole_arm = math.radians(-20)
+        self.forearm = math.radians(-50)
+
+    def arm_down(self):
+        # self.move_group_arm.go([RIGHT, math.radians(55), math.radians(-50), 0], wait=True)
+        self.move_group_arm.go([RIGHT, math.radians(-20), math.radians(30), 0], wait=True)
         self.move_group_arm.stop()
 
-    def extend_arm(self):
-        # self.move_group_arm.go([0, math.radians(15), math.radians(-15), 0], wait=True)
-        # self.move_group_arm.go([0, math.radians(30), math.radians(-30), 0], wait=True)
-        self.move_group_arm.go([0, math.radians(55), math.radians(-50), 0], wait=True)
-        self.move_group_arm.stop()
-
-    def retract_arm(self):
-        self.move_group_arm.go([0, math.radians(-55), math.radians(10), 0], wait=True)
+    def arm_back(self):
+        # self.move_group_arm.go([RIGHT, math.radians(55), math.radians(-50), 0], wait=True)
+        self.move_group_arm.go([RIGHT, math.radians(-10), math.radians(-10), 0], wait=True)
         self.move_group_arm.stop()
 
     def close_gripper(self):
