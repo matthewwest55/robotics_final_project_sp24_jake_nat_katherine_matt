@@ -17,11 +17,11 @@ Group Names: Matthew, Jake, Nat, and Katherine
 **Execution**
 ---------------------
 
-Challenges:
+Challenges
 --------------------------------
 
-Future Work:
+Future Work
 --------------------------------
 
-Takeaways:
+Takeaways
 --------------------------------
