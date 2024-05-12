@@ -17,12 +17,12 @@ import deeplake
 class CNN(nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=5, padding=2)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=5, padding=2)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, 27)  # 26 classes for letters A-Z + 1 for undetermined (necessary)
+        self.fc3 = nn.Linear(64, 26)  # 26 classes for letters A-Z + 1 for undetermined (necessary)
 
     def forward(self, x):
         x = self.pool(torch.relu(self.conv1(x)))
@@ -83,7 +83,7 @@ if __name__ == "__main__":
       running_loss = 0.0
       for i, data in enumerate(train_dataloader, 0):
           inputs, labels = data
-          labels = torch.flatten(labels)
+          labels = torch.flatten(labels) - 1
           #print(inputs.shape)
           #print(labels)      
           optimizer.zero_grad()
@@ -103,7 +103,7 @@ if __name__ == "__main__":
   with torch.no_grad():
       for data in test_dataloader:
           inputs, labels = data
-          labels = torch.flatten(labels)
+          labels = torch.flatten(labels) - 1
           outputs = model(inputs)
           _, predicted = torch.max(outputs.data, 1)
           total += labels.size(0)
