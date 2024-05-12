@@ -95,10 +95,10 @@ class GuessCam(object):
                 output = mod(transformed_image)
             probs = torch.softmax(output, dim=1)
             predicted_class = torch.argmax(probs, dim=1).item()
-            print(predicted_class)
+            print("This is the class: ", predicted_class)
             letter = self.alphabet[predicted_class]
 
-            print(letter)
+            print("This is the letter: ", letter)
             time.sleep(1)
             
 if __name__ == '__main__':

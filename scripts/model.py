@@ -93,7 +93,7 @@ if __name__ == "__main__":
           optimizer.step()
           running_loss += loss.item()
           if (i+1) % 100 == 0:
-              print(f'Epoch [{ epoch + 1 }/{num_epochs}], Step [{ i + 1 }/{ len(train_dataloader) }], Loss: { running_loss/100:.4f }')
+              print(f'Epoch [{ epoch + 1 }/{num_epochs}], Step [{ i + 1 }/{ len(train_dataloader) }], Loss: { running_loss/100:.4f}')
               running_loss = 0.0
 
   
