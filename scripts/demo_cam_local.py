@@ -57,10 +57,11 @@ class GuessCam(object):
             size = min(height, width)
 
             # Calculate the coordinates for cropping
-            top = 0
-            bottom = height
-            left = (width - height) // 2
-            right = left + height
+            top = int(height * 0.4)
+            bottom = int(height * .6
+                         )
+            left = int((width / 2)-(height*.1))
+            right = int((width/ 2) + (height*.1))
             cropped = frame[top:bottom, left:right]
 
             # Display the camera feed
