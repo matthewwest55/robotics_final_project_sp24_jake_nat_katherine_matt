@@ -21,7 +21,7 @@ class GuessCam(object):
         self.new_image = True
     
     @staticmethod
-    def gs_threshold(x, threshold=0.5):
+    def gs_threshold(x, threshold=0.35):
         x = torch.where(x <= threshold, torch.zeros_like(x), x)
         return x
     
@@ -37,6 +37,7 @@ class GuessCam(object):
             #v2.Lambda(lambda x: v2.functional.invert(x)),
             v2.ToImage(),
             v2.ToDtype(torch.float32, scale=True),
+            v2.Lambda(lambda x: self.gs_threshold(x)),
             v2.Normalize((0.1307,), (0.3081,))
             ])
         
