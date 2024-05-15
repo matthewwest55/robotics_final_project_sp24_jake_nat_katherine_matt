@@ -103,13 +103,13 @@ class MoveArm(object):
     ##This portion is responsible for drawing all alphabet letters
     #Letters Completed:
 
-    def draw_A(self, matrix, starting_index):
+    #def draw_A(self, matrix, starting_index):
 
-    def draw_B(self, matrix, starting_index):
+    #def draw_B(self, matrix, starting_index):
 
-    def draw_C(self, matrix, starting_index):
+    #def draw_C(self, matrix, starting_index):
 
-    def draw_D(self, matrix, starting_index):
+    #def draw_D(self, matrix, starting_index):
 
     def draw_E(self, matrix, starting_index):
         #top left corner
@@ -151,7 +151,7 @@ class MoveArm(object):
             pose_position = matrix[x + cell][y + 2]
             self.move_group_arm.go(pose_position)
 
-    def draw_G(self, matrix, starting_index):
+    #def draw_G(self, matrix, starting_index):
 
     def draw_H(self, matrix, starting_index):
         x, y = starting_index
@@ -176,7 +176,7 @@ class MoveArm(object):
             pose_position = matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
-    def draw_J(self, matrix, starting_index):
+    #def draw_J(self, matrix, starting_index):
 
     def draw_K(self, matrix, starting_index):
         #top left corner
@@ -244,15 +244,15 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
             
 
-    def draw_O(self, matrix, starting_index):
+    #def draw_O(self, matrix, starting_index):
 
-    def draw_P(self, matrix, starting_index):
+    #def draw_P(self, matrix, starting_index):
 
-    def draw_Q(self, matrix, starting_index):
+    #def draw_Q(self, matrix, starting_index):
 
-    def draw_R(self, matrix, starting_index):
+    #def draw_R(self, matrix, starting_index):
 
-    def draw_S(self, matrix, starting_index):
+    #def draw_S(self, matrix, starting_index):
 
     def draw_T(self, matrix, starting_index):
         #top left corner
@@ -282,15 +282,15 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
     
 
-    def draw_V(self, matrix, starting_index):
+    #def draw_V(self, matrix, starting_index):
 
-    def draw_W(self, matrix, starting_index):
+    #def draw_W(self, matrix, starting_index):
 
-    def draw_X(self, matrix, starting_index):
+    #def draw_X(self, matrix, starting_index):
 
-    def draw_Y(self, matrix, starting_index):
+    #def draw_Y(self, matrix, starting_index):
 
-    def draw_Z(self, matrix, starting_index):
+    #def draw_Z(self, matrix, starting_index):
         # I'm thinking about making variables to this class 
         # that allow me to track the current arm position
         # Using that information, we can move the robot arm slowly
