@@ -15,13 +15,13 @@ ik = inverseKinematics("RigidBodyTree", open_m);
 % Add header to file
 fprintf(fileID, "%s,%s,%s,%s,%s,%s,%s\n", "x_pos", "y_pos", "z_pos", "joint1_angle", "joint2_angle", "joint3_angle", "joint4_angle");
 
-x_pos = 0.3;
+x_pos = 0.2;
 % iterate over all positions we care about
-for y_pos = -0.2:0.01:0.2
+for y_pos = -0.1:0.01:0.1
     disp(y_pos);
-    for z_pos = 0.0:0.01:0.4
+    for z_pos = 0.15:0.01:0.35
         % Define our target position
-        pos = [(x_pos + abs(y_pos)^1.5 + abs(z_pos-.2)^1.5) y_pos z_pos];
+        pos = [(x_pos + abs(y_pos)^2.5 + abs(z_pos-.25)^2.5) y_pos z_pos];
         poseTF = trvec2tform(pos);
         
         % TODO: Might want to consider changing guess to last position
