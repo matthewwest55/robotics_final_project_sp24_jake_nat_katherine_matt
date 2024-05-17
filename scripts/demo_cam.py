@@ -32,7 +32,7 @@ class GuessCam(object):
         self.new_image = True
 
     @staticmethod
-    def gs_threshold(x, threshold=0.5):
+    def gs_threshold(x, threshold=0.45):
         x = torch.where(x <= threshold, torch.zeros_like(x), x)
         return x
     
@@ -74,8 +74,8 @@ class GuessCam(object):
                 pil_image = Image.fromarray(rgb_image)
 
                 # Display the camera feed
-                cv2.imshow("Camera Feed", frame)
-                cv2.waitKey(.5)
+                # cv2.imshow("Camera Feed", frame)
+                # cv2.waitKey(.5)
 
                 # Guessed Letter
                 transformed_image = transform(pil_image)
