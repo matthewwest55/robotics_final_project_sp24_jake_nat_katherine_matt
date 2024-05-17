@@ -20,11 +20,12 @@ class GuessCam(object):
         time.sleep(.1) # Rospy TODO
         self.run()
 
-    def action_check(self, data): 
+    def action_check(self, data):
+        time.sleep(1) # TODO: Delet4e] 
         self.new_image = True
     
     @staticmethod
-    def gs_threshold(x, threshold=0.5):
+    def gs_threshold(x, threshold=0.38):
         x = torch.where(x <= threshold, torch.zeros_like(x), x)
         return x
     
@@ -49,12 +50,16 @@ class GuessCam(object):
         mod.eval()
 
         while True: # This should eventually be rospy shutdown check TODO
+            ret, frame = self.cap.read()
+            if not ret:
+                print("Error capturing frame")
+                break
+
+            # Display the camera feed
+            # cv2.imshow("Camera Feed", frame)
+            # cv2.waitKey(500)
 
             if self.new_image == True:
-                ret, frame = self.cap.read()
-                if not ret:
-                    print("Error capturing frame")
-                    break
 
                 # Assuming frame is the image captured from your camera
                 height, width, _ = frame.shape
@@ -70,14 +75,12 @@ class GuessCam(object):
                 right = int((width/ 2) + (height*.1))
                 cropped = frame[top:bottom, left:right]
 
-                # Display the camera feed
-                cv2.imshow("Camera Feed", frame)
-                cv2.waitKey(.5)
 
                 rgb_image = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
                 pil_image = Image.fromarray(rgb_image)
                 transformed_image = transform(pil_image)
                 # Visualize processed image (for debugging)
+                
                 """plt.imshow(torch.squeeze(transformed_image), cmap='gray')
                 plt.savefig('image6-ringlight.png')
                 plt.show()"""
@@ -95,12 +98,14 @@ class GuessCam(object):
                 if letter == curr_guess:
                     curr_count += 1
                 else:
-                    self.first = False
+                    if not(curr_guess == "Null"):
+                        #print("Letter:",letter)
+                        self.first = False
                     curr_count = 1
                     curr_guess = letter
-                print(f"[{curr_count}/4] Prediction: {letter}.")
+                #print(f"[{curr_count}/7] Prediction: {letter}.")
 
-                if (curr_count == 5) and not (curr_guess in self.guesses):
+                if (curr_count == 7) and not (curr_guess in self.guesses):
                     if self.first:
                         curr_count = 1
                     else:
@@ -108,6 +113,7 @@ class GuessCam(object):
                         self.guesses.append(letter)
                         self.new_image = False
                         print(f"[!!!] Letter Guessed: {letter}.")
+                        self.action_check(curr_count) # TODO: delete
 
             time.sleep(.5) # Rospy TODO
 
