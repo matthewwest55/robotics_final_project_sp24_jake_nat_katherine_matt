@@ -31,11 +31,11 @@ class Hangman(object):
         elif letter in self.secret_word:
             print("Good guess!")
             # repeat guesses already handled by cam file
-            #self.guesses.append(letter)
+            self.guesses.append(letter)
         else:
             print("Wrong guess!")
             self.remaining_guesses -= 1
-            #self.guesses.append(letter)
+            self.guesses.append(letter)
     
 
     def is_game_over(self):
