@@ -32,14 +32,9 @@ class MoveArm(object):
         print("ready")
 
     def draw_galley(self, starting_index, matrix):
+        #for entire matrix, assume (0,0) is the top left corner
         #starting_index is a tuple bottom left corner of the galley
         #matrix is the matrix of robot arm positions
-        # In this function, we are going to have to pay mind to
-        # moving multiple joints at once
-        # Example: If the arm is high and begins moving down,
-        # it needs to extend a bit to keep touching the board
-        
-        # Maybe we can make the joints a function of one another?
 
         #this portion draws the galley base
         x, y = starting_index
@@ -66,9 +61,18 @@ class MoveArm(object):
 
     #this portion of code is responsible for drawing the body components
     def draw_head(self, matrix, starting_index):
+        #starting_index should be the top of the head
         x, y = starting_index
-        for cell in range(0, 16):
-            pass
+        coordinates = [(x + dx, y + dy) for dx, dy in [
+            (0, 0), (-1, 0), (-2, 1), (-3, 2),
+            (-3, 3), (-3, 4), (-2, 5), (-1, 6),
+            (0, 6), (1, 6), (2, 5), (3, 4),
+            (3, 3), (3, 2), (2, 1), (1, 0),
+            (0, 0)]]
+
+        for coord in coordinates:
+            self.move_group_arm.go(matrix[coord[0]][coord[1]])
+
 
     def draw_body(self, matrix, starting_index):
         x, y = starting_index
@@ -100,12 +104,42 @@ class MoveArm(object):
             pose_position = matrix[x + 27 + cell][y + 23 + cell]
             self.move_group_arm.go(pose_position)
 
-    ##This portion is responsible for drawing all alphabet letters
-    #Letters Completed:
 
-    #def draw_A(self, matrix, starting_index):
+    ##This portion is responsible for drawing all alphabet letters
+    def draw_A(self, matrix, starting_index):
+        #bottom left corner
+        x, y = starting_index
+        for cell in range(0, 4):
+            pose_position = matrix[x][y - cell]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 2):
+            pose_position = matrix[x + cell][y - 4]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 4):
+            pose_position = matrix[x + 3][y + cell]
+            self.move_group_arm.go(pose_position)
+
+        #reset position
+
+        for cell in range(0, 4):
+            pose_position = matrix[x + cell][y - 2]
+            self.move_group_arm.go(pose_position)
+            
 
     #def draw_B(self, matrix, starting_index):
+        #bottom left corner
+        x, y = starting_index
+        for cell in range(0, 5):
+            pose_position = matrix[x][y - cell]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + cell][y - 4]
+            self.move_group_arm.go(pose_position)
+
+        pose_position = matrix
 
     #def draw_C(self, matrix, starting_index):
 
@@ -244,7 +278,15 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
             
 
-    #def draw_O(self, matrix, starting_index):
+    def draw_O(self, matrix, starting_index):
+        x, y = starting_index
+        coordinates = [(x + dx, y + dy) for dx, dy in [
+            (0, 0), (-1, 0), (-2, 1), (-2, 2),
+            (-2, 3), (-1, 4), (0, 4), (1, 3),
+            (1, 2), (1, 1), (0, 0)]]
+
+        for coord in coordinates:
+            self.move_group_arm.go(matrix[coord[0]][coord[1]])
 
     #def draw_P(self, matrix, starting_index):
 
