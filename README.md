@@ -8,6 +8,7 @@ Group Names: Matthew, Jake, Nat, and Katherine
 **Project Description**
 ------------------------
 *Goal:*
+
 In this project, we aim to create a Turtlebot that is able to use computer vision and inverse mechanics to play a game of hang-man with a user. The Turtlebot will use computer vision to read a users letter guess after it has been written on a white board, and then employ inverse kinematics to either add to the stick-figure or notate a correct guess.
 
 Why this is interesting:
