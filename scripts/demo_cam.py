@@ -66,7 +66,7 @@ class GuessCam(object):
                 print("Error capturing frame")
                 break
 
-            if self.new_image == True:
+            if self.new_image:
 
                 # Assuming frame is the image captured from your camera
                 height, width, _ = frame.shape
