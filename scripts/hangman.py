@@ -49,3 +49,10 @@ class Hangman(object):
             return True
         else:
             return False
+
+    def index_check(self, letter):
+        val = []
+        for i in range(len(self.secret_word)):
+            if self.secret_word[i] == letter:
+                val.append(i)
+        return val
