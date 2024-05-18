@@ -31,23 +31,24 @@ class MoveArm(object):
         # The file is ordered from the bottom-right corner to the top-right
         # Then, it moves left one position and goes again
         # To make the matrix start at the top-left, we will reverse the ordering
-        matrix = np.ndarray((21, 21), dtype=np.ndarray)
+        self.matrix = np.ndarray((square_dim, square_dim), dtype=np.ndarray)
         for col in range(square_dim - 1, -1, -1):
             for row in range(square_dim - 1, -1, -1):
                 # print("Col: " + str(col * square_dim) + " row: " + str(row) + " final: " + str(col*square_dim + row))
-                matrix[square_dim - 1 - col][square_dim - 1 - row] = joint_positions_csv[(col*square_dim) + row][3:7]
+                self.matrix[square_dim - 1 - col][square_dim - 1 - row] = joint_positions_csv[(col*square_dim) + row][3:7]
 
         rospy.sleep(2)
 
         # self.reset_arm()
         # rospy.sleep(5)
-        self.open_gripper()
+        # self.open_gripper()
+        self.close_gripper()
 
         # Reset arm position
         # self.move_group_arm.go([0,0,0,0], wait=True)
         print("ready")
 
-    def draw_galley(self, starting_index, matrix):
+    def draw_galley(self, starting_index):
         #for entire matrix, assume (0,0) is the top left corner
         #starting_index is a tuple bottom left corner of the galley
         #matrix is the matrix of robot arm positions
@@ -55,25 +56,29 @@ class MoveArm(object):
         #this portion draws the galley base
         x, y = starting_index
         for cell in range(0, 10):
-                pose_position = matrix[x + 10 + cell][y + 27]
+                pose_position = self.matrix[x + 10 + cell][y + 27]
                 self.move_group_arm.go(pose_position)
+                rospy.sleep(1)
 
         self.reset_arm()
 
         #this portion draws the galley beam
         for cell in range(0, 23):
-            pose_position = matrix[x + 15][y + 27 - cell]
+            pose_position = self.matrix[x + 15][y + 27 - cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
         #this portion draws the galley top beam
         for cell in range(0, 11):
-            pose_position = matrix[x + cell + 5][y + 5]
+            pose_position = self.matrix[x + cell + 5][y + 5]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
         #this portion draws the hanging portion of the galley
         for cell in range(0, 6):
-            pose_position = matrix[x + 15][y - cell + 22]
+            pose_position = self.matrix[x + 15][y - cell + 22]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
     #this portion of code is responsible for drawing the body components
     def draw_head(self, matrix, starting_index):
@@ -87,37 +92,37 @@ class MoveArm(object):
             (0, 0)]]
 
         for coord in coordinates:
-            self.move_group_arm.go(matrix[coord[0]][coord[1]])
+            self.move_group_arm.go(self.matrix[coord[0]][coord[1]])
 
 
     def draw_body(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 7):
-            pose_position = matrix[x + 27][y + 16 + cell]
+            pose_position = self.matrix[x + 27][y + 16 + cell]
             self.move_group_arm.go(pose_position)
 
     def draw_left_arm(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = matrix[x + 27 - cell][y + 19 - cell]
+            pose_position = self.matrix[x + 27 - cell][y + 19 - cell]
             self.move_group_arm.go(pose_position)
 
     def draw_right_arm(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = matrix[x + 27 + cell][y + 19 - cell]
+            pose_position = self.matrix[x + 27 + cell][y + 19 - cell]
             self.move_group_arm.go(pose_position)
     
     def draw_left_leg(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = matrix[x + 27 - cell][y + 23 + cell]
+            pose_position = self.matrix[x + 27 - cell][y + 23 + cell]
             self.move_group_arm.go(pose_position)
 
     def draw_right_leg(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = matrix[x + 27 + cell][y + 23 + cell]
+            pose_position = self.matrix[x + 27 + cell][y + 23 + cell]
             self.move_group_arm.go(pose_position)
 
 
@@ -126,21 +131,21 @@ class MoveArm(object):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 4):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 2):
-            pose_position = matrix[x + cell][y - 4]
+            pose_position = self.matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 4):
-            pose_position = matrix[x + 3][y + cell]
+            pose_position = self.matrix[x + 3][y + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
 
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y - 2]
+            pose_position = self.matrix[x + cell][y - 2]
             self.move_group_arm.go(pose_position)
             
 
@@ -148,25 +153,25 @@ class MoveArm(object):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 4]
+            pose_position = self.matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
-        self.move_group_arm.go(matrix[x + 3][y - 3])
+        self.move_group_arm.go(self.matrix[x + 3][y - 3])
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 2 - cell][y - 2]
+            pose_position = self.matrix[x + 2 - cell][y - 2]
             self.move_group_arm.go(pose_position)
 
         #reset pose
 
-        self.move_group_arm.go(matrix[x + 3][y - 1])
+        self.move_group_arm.go(self.matrix[x + 3][y - 1])
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 2 - cell][y]
+            pose_position = self.matrix[x + 2 - cell][y]
             self.move_group_arm.go(pose_position)
 
         
@@ -177,19 +182,19 @@ class MoveArm(object):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 4]
+            pose_position = self.matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            self.move_group_arm.go(matrix[x + 3][y - 3 + cell])
+            self.move_group_arm.go(self.matrix[x + 3][y - 3 + cell])
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 3 - cell][y]
+            pose_position = self.matrix[x + 3 - cell][y]
             self.move_group_arm.go(pose_position)
 
 
@@ -197,22 +202,22 @@ class MoveArm(object):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y]
+            pose_position = self.matrix[x + cell][y]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y + 2]
+            pose_position = self.matrix[x + cell][y + 2]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y + 4]
+            pose_position = self.matrix[x + cell][y + 4]
             self.move_group_arm.go(pose_position)
 
 
@@ -220,17 +225,17 @@ class MoveArm(object):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y]
+            pose_position = self.matrix[x + cell][y]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y + 2]
+            pose_position = self.matrix[x + cell][y + 2]
             self.move_group_arm.go(pose_position)
 
     #def draw_G(self, matrix, starting_index):
@@ -238,25 +243,26 @@ class MoveArm(object):
     def draw_H(self, matrix, starting_index):
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y + 3]
+            pose_position = self.matrix[x + cell][y + 3]
             self.move_group_arm.go(pose_position)
         
         #reset position
         for cell in range(0, 5):
-            pose_position = matrix[x + 3][y + cell]
+            pose_position = self.matrix[x + 3][y + cell]
             self.move_group_arm.go(pose_position)
 
 
-    def draw_I(self, matrix, starting_index):
+    def draw_I(self, starting_index):
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
     #def draw_J(self, matrix, starting_index):
 
@@ -264,48 +270,50 @@ class MoveArm(object):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y + 3 - cell]
+            pose_position = self.matrix[x + cell][y + 3 - cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y + 1 + cell]
+            pose_position = self.matrix[x + cell][y + 1 + cell]
             self.move_group_arm.go(pose_position)
 
-    def draw_L(self, matrix, starting_index):
+    def draw_L(self, starting_index):
         #bottom left corner
         x, y = starting_index
         y += 5
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y + 4]
+            pose_position = self.matrix[x + cell][y + 4]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
     def draw_M(self, matrix, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 4 + cell]
+            pose_position = self.matrix[x + cell][y - 4 + cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 2 + cell][y - 2 - cell]
+            pose_position = self.matrix[x + 2 + cell][y - 2 - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 5):
-            pose_position = matrix[x + 4][y - 4 + cell]
+            pose_position = self.matrix[x + 4][y - 4 + cell]
             self.move_group_arm.go(pose_position)
             
 
@@ -313,17 +321,17 @@ class MoveArm(object):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y - 4 + cell]
+            pose_position = self.matrix[x + cell][y - 4 + cell]
             self.move_group_arm.go(pose_position)
 
         #reset position
 
         for cell in range(0, 5):
-            pose_position = matrix[x + 3][y - 4 + cell]
+            pose_position = self.matrix[x + 3][y - 4 + cell]
             self.move_group_arm.go(pose_position)
             
 
@@ -339,23 +347,23 @@ class MoveArm(object):
             (1, 2), (1, 1), (0, 0)]]
 
         for coord in coordinates:
-            self.move_group_arm.go(matrix[coord[0]][coord[1]])
+            self.move_group_arm.go(self.matrix[coord[0]][coord[1]])
 
     def draw_P(self, matrix, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 4]
+            pose_position = self.matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
-        self.move_group_arm.go(matrix[x + 3][y - 3])
+        self.move_group_arm.go(self.matrix[x + 3][y - 3])
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 2 - cell][y - 2]
+            pose_position = self.matrix[x + 2 - cell][y - 2]
             self.move_group_arm.go(pose_position)
 
 
@@ -366,21 +374,21 @@ class MoveArm(object):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
-            pose_position = matrix[x][y - cell]
+            pose_position = self.matrix[x][y - cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 4]
+            pose_position = self.matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
-        self.move_group_arm.go(matrix[x + 3][y - 3])
+        self.move_group_arm.go(self.matrix[x + 3][y - 3])
 
         for cell in range(0, 3):
-            pose_position = matrix[x + 2 - cell][y - 2]
+            pose_position = self.matrix[x + 2 - cell][y - 2]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y - 3 + cell]
+            pose_position = self.matrix[x + cell][y - 3 + cell]
             self.move_group_arm.go(pose_position)
 
     #def draw_S(self, matrix, starting_index):
@@ -394,11 +402,11 @@ class MoveArm(object):
         y -= 4
 
         for cell in range(0, 3):
-            pose_position = matrix[x + cell][y]
+            pose_position = self.matrix[x + cell][y]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 5):
-            pose_position = matrix[x + 1][y + cell]
+            pose_position = self.matrix[x + 1][y + cell]
             self.move_group_arm.go(pose_position)
 
     def draw_U(self, matrix, starting_index):
@@ -408,16 +416,16 @@ class MoveArm(object):
         #top left corner
         y -= 4
         for cell in range(0, 5):
-            pose_position = matrix[x][y + cell]
+            pose_position = self.matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
 
         for cell in range(0, 4):
-            pose_position = matrix[x + cell][y + 4]
+            pose_position = self.matrix[x + cell][y + 4]
             self.move_group_arm.go(pose_position)
 
         #reset position
         for cell in range(0, 5):
-            pose_position = matrix[x + 3][y + cell]
+            pose_position = self.matrix[x + 3][y + cell]
             self.move_group_arm.go(pose_position)
     
 
@@ -513,13 +521,13 @@ class MoveArm(object):
         self.move_group_arm.stop()
 
     def close_gripper(self):
-        gripper_joint_close = [-0.005, -0.005]
+        gripper_joint_close = [0.011, 0.011]
 
         self.move_group_gripper.go(gripper_joint_close)
         self.move_group_gripper.stop()
 
     def open_gripper(self):
-        gripper_joint_open = [0.011, 0.011]
+        gripper_joint_open = [0.013, 0.013]
 
         self.move_group_gripper.go(gripper_joint_open)
         self.move_group_gripper.stop()
