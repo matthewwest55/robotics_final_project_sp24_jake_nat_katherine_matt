@@ -128,7 +128,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
             
 
-    #def draw_B(self, matrix, starting_index):
+    def draw_B(self, matrix, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -139,11 +139,43 @@ class MoveArm(object):
             pose_position = matrix[x + cell][y - 4]
             self.move_group_arm.go(pose_position)
 
-        pose_position = matrix
+        self.move_group_arm.go(matrix[x + 3][y - 3])
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + 2 - cell][y - 2]
+            self.move_group_arm.go(pose_position)
+
+        #reset pose
+
+        self.move_group_arm.go(matrix[x + 3][y - 1])
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + 2 - cell][y]
+            self.move_group_arm.go(pose_position)
+
+        
 
     #def draw_C(self, matrix, starting_index):
 
-    #def draw_D(self, matrix, starting_index):
+    def draw_D(self, matrix, starting_index):
+        #bottom left corner
+        x, y = starting_index
+        for cell in range(0, 5):
+            pose_position = matrix[x][y - cell]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + cell][y - 4]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            self.move_group_arm.go(matrix[x + 3][y - 3 + cell])
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + 3 - cell][y]
+            self.move_group_arm.go(pose_position)
+
 
     def draw_E(self, matrix, starting_index):
         #top left corner
@@ -230,8 +262,9 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
 
     def draw_L(self, matrix, starting_index):
-        #top left corner
+        #bottom left corner
         x, y = starting_index
+        y += 5
         for cell in range(0, 5):
             pose_position = matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
@@ -279,7 +312,11 @@ class MoveArm(object):
             
 
     def draw_O(self, matrix, starting_index):
+        #bottom left corner
         x, y = starting_index
+        #top of O
+        x += 2
+        y -= 4
         coordinates = [(x + dx, y + dy) for dx, dy in [
             (0, 0), (-1, 0), (-2, 1), (-2, 2),
             (-2, 3), (-1, 4), (0, 4), (1, 3),
@@ -288,17 +325,58 @@ class MoveArm(object):
         for coord in coordinates:
             self.move_group_arm.go(matrix[coord[0]][coord[1]])
 
-    #def draw_P(self, matrix, starting_index):
+    def draw_P(self, matrix, starting_index):
+        #bottom left corner
+        x, y = starting_index
+        for cell in range(0, 5):
+            pose_position = matrix[x][y - cell]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + cell][y - 4]
+            self.move_group_arm.go(pose_position)
+
+        self.move_group_arm.go(matrix[x + 3][y - 3])
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + 2 - cell][y - 2]
+            self.move_group_arm.go(pose_position)
+
 
     #def draw_Q(self, matrix, starting_index):
+        #OMIT Q, CHALLENGING
 
-    #def draw_R(self, matrix, starting_index):
+    def draw_R(self, matrix, starting_index):
+        #bottom left corner
+        x, y = starting_index
+        for cell in range(0, 5):
+            pose_position = matrix[x][y - cell]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + cell][y - 4]
+            self.move_group_arm.go(pose_position)
+
+        self.move_group_arm.go(matrix[x + 3][y - 3])
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + 2 - cell][y - 2]
+            self.move_group_arm.go(pose_position)
+
+        for cell in range(0, 3):
+            pose_position = matrix[x + cell][y - 3 + cell]
+            self.move_group_arm.go(pose_position)
 
     #def draw_S(self, matrix, starting_index):
+        #pass
 
     def draw_T(self, matrix, starting_index):
-        #top left corner
+        #bottom left corner
         x, y = starting_index
+
+        #top left of T
+        y -= 4
+
         for cell in range(0, 3):
             pose_position = matrix[x + cell][y]
             self.move_group_arm.go(pose_position)
@@ -308,8 +386,11 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
 
     def draw_U(self, matrix, starting_index):
-        #top left corner
+        #bottom left corner
         x, y = starting_index
+
+        #top left corner
+        y -= 4
         for cell in range(0, 5):
             pose_position = matrix[x][y + cell]
             self.move_group_arm.go(pose_position)
@@ -325,14 +406,21 @@ class MoveArm(object):
     
 
     #def draw_V(self, matrix, starting_index):
+        #pass
 
     #def draw_W(self, matrix, starting_index):
+        #pass
 
     #def draw_X(self, matrix, starting_index):
+        #pass
 
     #def draw_Y(self, matrix, starting_index):
+        #pass
 
     #def draw_Z(self, matrix, starting_index):
+        #pass
+
+
         # I'm thinking about making variables to this class 
         # that allow me to track the current arm position
         # Using that information, we can move the robot arm slowly
@@ -439,6 +527,15 @@ class MoveArm(object):
 
         self.move_group_arm.go([0, 0.111236, -0.085272, -0.043222], wait=True)
         rospy.sleep(5)
+        self.move_group_arm.stop()
+
+    def correct(self):
+        self.move_group_arm.go([0, 0.326095, -0.942478, -0.227004], wait=True)
+        self.move_group_arm.stop()
+
+
+    def incorrect(self):
+        self.move_group_arm.go([2.64377, -1.685372, -0.942478, -0.227004], wait=True)
         self.move_group_arm.stop()
 
 if __name__ == "__main__":
