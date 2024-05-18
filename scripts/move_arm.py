@@ -3,6 +3,7 @@
 import rospy
 # import the moveit_commander, which allows us to control the arms
 import moveit_commander
+import numpy as np
 import math
 
 RIGHT = math.radians(-90)
@@ -20,6 +21,21 @@ class MoveArm(object):
         # the interface to the group of joints making up the turtlebot3
         # openmanipulator gripper
         self.move_group_gripper = moveit_commander.MoveGroupCommander("gripper")
+
+        # Skip first row (header) with skiprows
+        joint_positions_csv = np.loadtxt("cry.csv", delimiter=",", skiprows=1)
+
+        # knowing the matrix is a square, we can take the sqaure root to get its dimensions
+        square_dim = int(np.sqrt(len(joint_positions_csv)))
+
+        # The file is ordered from the bottom-right corner to the top-right
+        # Then, it moves left one position and goes again
+        # To make the matrix start at the top-left, we will reverse the ordering
+        matrix = np.ndarray((21, 21), dtype=np.ndarray)
+        for col in range(square_dim - 1, -1, -1):
+            for row in range(square_dim - 1, -1, -1):
+                # print("Col: " + str(col * square_dim) + " row: " + str(row) + " final: " + str(col*square_dim + row))
+                matrix[square_dim - 1 - col][square_dim - 1 - row] = joint_positions_csv[(col*square_dim) + row][3:7]
 
         rospy.sleep(2)
 
@@ -39,8 +55,8 @@ class MoveArm(object):
         #this portion draws the galley base
         x, y = starting_index
         for cell in range(0, 10):
-            pose_position = matrix[x + 10 + cell][y + 27]
-            self.move_group_arm.go(pose_position)
+                pose_position = matrix[x + 10 + cell][y + 27]
+                self.move_group_arm.go(pose_position)
 
         self.reset_arm()
 
