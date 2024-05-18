@@ -16,6 +16,9 @@ Incorporating user-robot interaction is something we are interested in exploring
 
 What were we able to accomplish:
 
+Throughout this project, we were able to incorporate a computer vision model capable of recognizing handwriting on a white board with a high level of accuracy. We were also able to develop an inverse kinematics system that allowed for an OpenManipulator arm to draw on a white board without having a visual aid to guide it. We experimented with which combinations of letters were easiest and most accurate to both recognize and draw, and then utilized this downsized alphabet to construct a dictionary of words that can be guessed by a user.
+
+
 Main components and how they fit together:
 
 
@@ -32,6 +35,11 @@ Robot Algorithms & Major Components:
 ---------------------
 (Step-by-step instructions of how to run code)
 
+
+Marker Attachment Instructions:
+------------------------------
+Within the "Models" folder you will find a 
+
 Challenges
 --------------------------------
 Inverse Kinematics:
@@ -42,8 +50,11 @@ Deciding which system to use when developing an inverse kinematics system proved
       2. Isolating a plane within Gazebo and then calculating the joint positions of the TB model, which led to issues with consistency between points. Just because a configuration was calculated didnt mean it was the optimal one.
       3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions
 
+Computer Vision:
+
 Future Work
 --------------------------------
+In the future, we would hope to make this system more dynamic, so it could set its distance from a parallel plane (or white board) and run the calculations internally to decide what the OpenManipulator arm needs to draw where. We would also like to incorporate more overall fuctionality, such as indicating on the board which letters have already been guessed, or being able to adjust to words of varying lengths.
 
 Takeaways
 --------------------------------
