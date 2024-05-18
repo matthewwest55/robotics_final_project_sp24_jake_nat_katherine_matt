@@ -32,10 +32,12 @@ class Hangman(object):
             print("Good guess!")
             # repeat guesses already handled by cam file
             self.guesses.append(letter)
+            return True
         else:
             print("Wrong guess!")
             self.remaining_guesses -= 1
             self.guesses.append(letter)
+            return False
     
 
     def is_game_over(self):
