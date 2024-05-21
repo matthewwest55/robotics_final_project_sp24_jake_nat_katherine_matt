@@ -57,7 +57,7 @@ class GuessCam(object):
             v2.Normalize((0.1307,), (0.3081,))
             ])
         
-        model = torch.load("letter_model2.pt")
+        model = torch.load("/home/jake/catkin_ws/src/robotics_final_project/scripts/letter_model2.pt")
         model.eval()
 
         while not rospy.is_shutdown():
