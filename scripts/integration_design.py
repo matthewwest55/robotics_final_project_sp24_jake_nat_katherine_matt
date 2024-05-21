@@ -47,26 +47,44 @@ class MoveArm(object):
 
     def man_draw(self, remaining)
         # Need to update matrix indices to values associated w each limb
-        # These values should be static TODO
-        placeholder = 0 # !!! DELETE
+        # These values should be static
+        #placeholder = 0 # !!! DELETE -> commented out
+        #NOTE: these values can be updated depending on where the arm draws best, and each "placeholder"
+        #should be translated the same if we do choose to move the gallows or body.
+        #overcorrection adjustments might also need to be made
         if remaining == 5:
-            self.draw_head(self.matrix, placeholder)
+            self.draw_head(self.matrix, (26, 9))
         elif remaining == 4:
-            self.draw_body(self.matrix, placeholder)
+            self.draw_body(self.matrix, (26, 15))
         elif remaining == 3:
-            self.draw_left_arm(self.matrix, placeholder)
+            self.draw_left_arm(self.matrix, (26, 19))
         elif remaining == 2:
-            self.draw_right_arm(self.matrix, placeholder)
-        elif remaining == 1;
-            self.draw_left_leg(self.matrix, placeholder)
+            self.draw_right_arm(self.matrix, (26, 19))
+        elif remaining == 1:
+            self.draw_left_leg(self.matrix, (26, 21))
         else:
-            self.draw_right_leg(self.matrix, placeholder)
+            self.draw_right_leg(self.matrix, (26, 21))
 
     def mat_ind(self, num):
         # num is a value in [0,4] (for 5-letter secret word)
         # given num, return matrix index for drawing the letter
-        # TODO
-        return 0
+        
+        #the return tuple is the bottom left corner of each letter, and (ideally)
+        #each letter function should just need the bottom left corner location
+        #and will adjust from
+        if num == 0:
+            return (34, 4)
+        elif num == 1:
+            return (34, 11)
+        elif num == 2:
+            return (34, 18)
+        elif num == 3:
+            return (34, 25)
+        elif num == 4:
+            return (34, 32)
+        else:
+            print("invalid num value passed")
+            return 0
     
     
     def letter_draw(self, letter, mat_ind):

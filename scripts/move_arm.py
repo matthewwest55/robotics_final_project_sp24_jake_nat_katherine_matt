@@ -23,7 +23,7 @@ class MoveArm(object):
         self.move_group_gripper = moveit_commander.MoveGroupCommander("gripper")
 
         # Skip first row (header) with skiprows
-        joint_positions_csv = np.loadtxt("cry.csv", delimiter=",", skiprows=1)
+        joint_positions_csv = np.loadtxt("correct_size_2.csv", delimiter=",", skiprows=1)
 
         # knowing the matrix is a square, we can take the sqaure root to get its dimensions
         square_dim = int(np.sqrt(len(joint_positions_csv)))
@@ -81,8 +81,9 @@ class MoveArm(object):
             rospy.sleep(1)
 
     #this portion of code is responsible for drawing the body components
-    def draw_head(self, matrix, starting_index):
+    def draw_head(self, starting_index):
         #starting_index should be the top of the head
+        #current starting index = (26, 9)
         x, y = starting_index
         coordinates = [(x + dx, y + dy) for dx, dy in [
             (0, 0), (-1, 0), (-2, 1), (-3, 2),
@@ -93,37 +94,48 @@ class MoveArm(object):
 
         for coord in coordinates:
             self.move_group_arm.go(self.matrix[coord[0]][coord[1]])
+            rospy.sleep(1)
 
 
-    def draw_body(self, matrix, starting_index):
+    def draw_body(self, starting_index):
+        #current starting index = (26,15)
         x, y = starting_index
         for cell in range(0, 7):
-            pose_position = self.matrix[x + 27][y + 16 + cell]
+            pose_position = self.matrix[x][y + 7 + cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
-    def draw_left_arm(self, matrix, starting_index):
+    def draw_left_arm(self, starting_index):
+        #current starting index = (26, 19)
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = self.matrix[x + 27 - cell][y + 19 - cell]
+            pose_position = self.matrix[x - cell][y + 9 - cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
-    def draw_right_arm(self, matrix, starting_index):
+    def draw_right_arm(self, starting_index):
+        #current starting index = (26, 19)
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = self.matrix[x + 27 + cell][y + 19 - cell]
+            pose_position = self.matrix[x + cell][y + 9 - cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
     
-    def draw_left_leg(self, matrix, starting_index):
+    def draw_left_leg(self, starting_index):
+        #current starting index = (26, 21)
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = self.matrix[x + 27 - cell][y + 23 + cell]
+            pose_position = self.matrix[x + 1 - cell][y + 12 + cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
-    def draw_right_leg(self, matrix, starting_index):
+    def draw_right_leg(self, starting_index):
+        #current starting index = (26, 21)
         x, y = starting_index
         for cell in range(0, 3):
-            pose_position = self.matrix[x + 27 + cell][y + 23 + cell]
+            pose_position = self.matrix[x - 1+ cell][y + 12 + cell]
             self.move_group_arm.go(pose_position)
+            rospy.sleep(1)
 
 
     ##This portion is responsible for drawing all alphabet letters
@@ -176,7 +188,9 @@ class MoveArm(object):
 
         
 
-    #def draw_C(self, matrix, starting_index):
+    def draw_C(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
     def draw_D(self, matrix, starting_index):
         #bottom left corner
@@ -238,7 +252,9 @@ class MoveArm(object):
             pose_position = self.matrix[x + cell][y + 2]
             self.move_group_arm.go(pose_position)
 
-    #def draw_G(self, matrix, starting_index):
+    def draw_G(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
     def draw_H(self, matrix, starting_index):
         x, y = starting_index
@@ -264,7 +280,9 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
             rospy.sleep(1)
 
-    #def draw_J(self, matrix, starting_index):
+    def draw_J(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
     def draw_K(self, matrix, starting_index):
         #top left corner
@@ -367,8 +385,9 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
 
 
-    #def draw_Q(self, matrix, starting_index):
-        #OMIT Q, CHALLENGING
+    def draw_Q(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
     def draw_R(self, matrix, starting_index):
         #bottom left corner
@@ -391,8 +410,9 @@ class MoveArm(object):
             pose_position = self.matrix[x + cell][y - 3 + cell]
             self.move_group_arm.go(pose_position)
 
-    #def draw_S(self, matrix, starting_index):
-        #pass
+    def draw_S(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
     def draw_T(self, matrix, starting_index):
         #bottom left corner
@@ -429,72 +449,77 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position)
     
 
-    #def draw_V(self, matrix, starting_index):
-        #pass
+    def draw_V(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
-    #def draw_W(self, matrix, starting_index):
-        #pass
+    def draw_W(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
-    #def draw_X(self, matrix, starting_index):
-        #pass
+    def draw_X(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
-    #def draw_Y(self, matrix, starting_index):
-        #pass
+    def draw_Y(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
-    #def draw_Z(self, matrix, starting_index):
-        #pass
+    def draw_Z(self, matrix, starting_index):
+        print("letter drawing not implemented")
+        pass
 
 
-        # I'm thinking about making variables to this class 
-        # that allow me to track the current arm position
-        # Using that information, we can move the robot arm slowly
-        # and make movement a function of different joint positions
+        # # I'm thinking about making variables to this class 
+        # # that allow me to track the current arm position
+        # # Using that information, we can move the robot arm slowly
+        # # and make movement a function of different joint positions
         
-        # self.arm_down()
+        # # self.arm_down()
+        # # rospy.sleep(5)
+        # # self.arm_back()
+
+        # # Might also need to make the gripper angle a function of where the arm is
+        # # Alright, need to figure out the proportions we should be using
+
+        # # Should be able to get to centered from other values?
+        # centered = [math.radians(-90), math.radians(18), math.radians(-2), math.radians(-16)]
+        # top_left = [math.radians(-72), math.radians(22), math.radians(-22), math.radians(-21)]
+        # top_right = [math.radians(-108), math.radians(22), math.radians(-22), math.radians(-21)]
+        # bottom_right = [math.radians(-108), math.radians(43), math.radians(-6), math.radians(-11)]
+        # bottom_left = [math.radians(-72), math.radians(43), math.radians(-6), math.radians(-11)]
+
+        # self.move_group_arm.go(centered, wait=True)
         # rospy.sleep(5)
-        # self.arm_back()
-
-        # Might also need to make the gripper angle a function of where the arm is
-        # Alright, need to figure out the proportions we should be using
-
-        # Should be able to get to centered from other values?
-        centered = [math.radians(-90), math.radians(18), math.radians(-2), math.radians(-16)]
-        top_left = [math.radians(-72), math.radians(22), math.radians(-22), math.radians(-21)]
-        top_right = [math.radians(-108), math.radians(22), math.radians(-22), math.radians(-21)]
-        bottom_right = [math.radians(-108), math.radians(43), math.radians(-6), math.radians(-11)]
-        bottom_left = [math.radians(-72), math.radians(43), math.radians(-6), math.radians(-11)]
-
-        self.move_group_arm.go(centered, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        self.move_group_arm.go(top_left, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        self.move_group_arm.go(top_right, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        self.move_group_arm.go(bottom_right, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        self.move_group_arm.go(bottom_left, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        self.move_group_arm.go(top_left, wait=True)
-        rospy.sleep(5)
-        self.move_group_arm.stop()
-
-        # for i in range(-10, 0, 2):
-        #     # self.move_group_arm.go([RIGHT, math.radians(2*i), math.radians((5*i)+50), 0], wait=True)
-        #     # self.move_group_arm.go([RIGHT, math.radians(-20), math.radians((5*i)+50), 0], wait=True)
-        #     self.move_group_arm.go([RIGHT, math.radians(-2*i), math.radians(-10), 0], wait=True)
-        #     rospy.sleep(2)
-
         # self.move_group_arm.stop()
+
+        # self.move_group_arm.go(top_left, wait=True)
+        # rospy.sleep(5)
+        # self.move_group_arm.stop()
+
+        # self.move_group_arm.go(top_right, wait=True)
+        # rospy.sleep(5)
+        # self.move_group_arm.stop()
+
+        # self.move_group_arm.go(bottom_right, wait=True)
+        # rospy.sleep(5)
+        # self.move_group_arm.stop()
+
+        # self.move_group_arm.go(bottom_left, wait=True)
+        # rospy.sleep(5)
+        # self.move_group_arm.stop()
+
+        # self.move_group_arm.go(top_left, wait=True)
+        # rospy.sleep(5)
+        # self.move_group_arm.stop()
+
+        # # for i in range(-10, 0, 2):
+        # #     # self.move_group_arm.go([RIGHT, math.radians(2*i), math.radians((5*i)+50), 0], wait=True)
+        # #     # self.move_group_arm.go([RIGHT, math.radians(-20), math.radians((5*i)+50), 0], wait=True)
+        # #     self.move_group_arm.go([RIGHT, math.radians(-2*i), math.radians(-10), 0], wait=True)
+        # #     rospy.sleep(2)
+
+        # # self.move_group_arm.stop()
 
 
     def reset_arm(self):
@@ -551,15 +576,6 @@ class MoveArm(object):
 
         self.move_group_arm.go([0, 0.111236, -0.085272, -0.043222], wait=True)
         rospy.sleep(5)
-        self.move_group_arm.stop()
-
-    def correct(self):
-        self.move_group_arm.go([0, 0.326095, -0.942478, -0.227004], wait=True)
-        self.move_group_arm.stop()
-
-
-    def incorrect(self):
-        self.move_group_arm.go([2.64377, -1.685372, -0.942478, -0.227004], wait=True)
         self.move_group_arm.stop()
 
 if __name__ == "__main__":

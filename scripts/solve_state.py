@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # Init our robot controller objects
     arm_commands_node = MoveArm()
 
-    arm_commands_node.draw_L((20,20))
+    arm_commands_node.draw_right_leg((20,10))
 
     # arm_commands_node.draw_line()
     # # arm_commands_node.drop_object()
