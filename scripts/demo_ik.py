@@ -37,10 +37,8 @@ class DemoIK:
                     for i in letter_indices:
                         mat_ind = self.arm_commands_node.letter_index(i)
                         self.arm_commands_node.letter_draw(letter, mat_ind)
-                    self.guess_pub.publish(String(letter = "Correct guess passed"))    
                 else:
                     self.arm_commands_node.man_draw(self.game.remaining_guesses)
-                    self.guess_pub.publish(String(letter = "Incorrect guess passed"))
             else: 
                 self.game_over = True
                 print("Restart to play a new game.")
@@ -48,6 +46,7 @@ class DemoIK:
 if __name__ == '__main__':
     demo_ik = DemoIK()
     while not demo_ik.game_over:
+        print("Input next guess now!")
         next_letter = input()
         print(next_letter)
         demo_ik.guessed(next_letter)
