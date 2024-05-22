@@ -96,22 +96,22 @@ class MoveArm(object):
         #should be translated the same if we do choose to move the gallows or body.
         #overcorrection adjustments might also need to be made
         if remaining == 5:
-            self.draw_head(self.matrix, (26, 9))
+            self.draw_head((26, 9))
             #(19,9) ->translated to center for Matt
         elif remaining == 4:
-            self.draw_body(self.matrix, (26, 15))
+            self.draw_body((26, 15))
             #(19,15) ->translated to center for Matt
         elif remaining == 3:
-            self.draw_left_arm(self.matrix, (26, 19))
+            self.draw_left_arm((26, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 2:
-            self.draw_right_arm(self.matrix, (26, 19))
+            self.draw_right_arm((26, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 1:
-            self.draw_left_leg(self.matrix, (26, 21))
+            self.draw_left_leg((26, 21))
             #(19,21) ->translated to center for Matt
         else:
-            self.draw_right_leg(self.matrix, (26, 21))
+            self.draw_right_leg((26, 21))
             #(19,21) ->translated to center for Matt
 
     def letter_index(self, num):
@@ -138,57 +138,57 @@ class MoveArm(object):
     
     def letter_draw(self, letter, mat_ind):
         if letter == "A":
-            self.draw_A(self.matrix, mat_ind)
+            self.draw_A(mat_ind)
         elif letter == "B":
-            self.draw_B(self.matrix, mat_ind)
+            self.draw_B(mat_ind)
         # elif letter == "C":
-        #    self.draw_C(self.matrix, mat_ind)
+        #    self.draw_C(mat_ind)
         elif letter == "D":
-            self.draw_D(self.matrix, mat_ind)
+            self.draw_D(mat_ind)
         elif letter == "E":
-            self.draw_E(self.matrix, mat_ind)
+            self.draw_E(mat_ind)
         elif letter == "F":
-            self.draw_F(self.matrix, mat_ind)
+            self.draw_F(mat_ind)
         # elif letter == "G":
-        #     self.draw_G(self.matrix, mat_ind)
+        #     self.draw_G(mat_ind)
         elif letter == "H":
-            self.draw_H(self.matrix, mat_ind)
+            self.draw_H(mat_ind)
         elif letter == "I":
-            self.draw_I(self.matrix, mat_ind)
+            self.draw_I(mat_ind)
         # elif letter == "J":
-        #    self.draw_J(self.matrix, mat_ind)
+        #    self.draw_J(mat_ind)
         elif letter == "K":
-            self.draw_K(self.matrix, mat_ind)
+            self.draw_K(mat_ind)
         elif letter == "L":
-            self.draw_L(self.matrix, mat_ind)
+            self.draw_L(mat_ind)
         elif letter == "M":
-            self.draw_M(self.matrix, mat_ind)
+            self.draw_M(mat_ind)
         elif letter == "N":
-            self.draw_N(self.matrix, mat_ind)
+            self.draw_N(mat_ind)
         elif letter == "O":
-            self.draw_O(self.matrix, mat_ind)
+            self.draw_O(mat_ind)
         elif letter == "P":
-            self.draw_P(self.matrix, mat_ind)
+            self.draw_P(mat_ind)
         # elif letter == "Q":
-        #    self.draw_Q(self.matrix, mat_ind)
+        #    self.draw_Q(mat_ind)
         elif letter == "R":
-            self.draw_R(self.matrix, mat_ind)
+            self.draw_R(mat_ind)
         # elif letter == "S":
-        #    self.draw_S(self.matrix, mat_ind)
+        #    self.draw_S(mat_ind)
         elif letter == "T":
-            self.draw_T(self.matrix, mat_ind)
+            self.draw_T(mat_ind)
         elif letter == "U":
-            self.draw_U(self.matrix, mat_ind)
+            self.draw_U(mat_ind)
         # elif letter == "V":
-        #     self.draw_V(self.matrix, mat_ind)
+        #     self.draw_V(mat_ind)
         # elif letter == "W":
-        #     self.draw_W(self.matrix, mat_ind)
+        #     self.draw_W(mat_ind)
         # elif letter == "X":
-        #     self.draw_X(self.matrix, mat_ind)
+        #     self.draw_X(mat_ind)
         # elif letter == "Y":
-        #     self.draw_Y(self.matrix, mat_ind)
+        #     self.draw_Y(mat_ind)
         # elif letter == "Z":
-        #     self.draw_Z(self.matrix, mat_ind)
+        #     self.draw_Z(mat_ind)
 
 
 
@@ -341,7 +341,7 @@ class MoveArm(object):
 
 
     ##This portion is responsible for drawing all alphabet letters
-    def draw_A(self, matrix, starting_index):
+    def draw_A(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 4):
@@ -363,7 +363,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
             
 
-    def draw_B(self, matrix, starting_index):
+    def draw_B(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -390,11 +390,11 @@ class MoveArm(object):
 
         
 
-    def draw_C(self, matrix, starting_index):
+    def draw_C(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_D(self, matrix, starting_index):
+    def draw_D(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -414,7 +414,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
 
 
-    def draw_E(self, matrix, starting_index):
+    def draw_E(self, starting_index):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -437,7 +437,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
 
 
-    def draw_F(self, matrix, starting_index):
+    def draw_F(self, starting_index):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -454,11 +454,11 @@ class MoveArm(object):
             pose_position = self.matrix[x + cell][y + 2]
             self.move_group_arm.go(pose_position, wait=True)
 
-    def draw_G(self, matrix, starting_index):
+    def draw_G(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_H(self, matrix, starting_index):
+    def draw_H(self, starting_index):
         x, y = starting_index
         for cell in range(0, 5):
             pose_position = self.matrix[x][y + cell]
@@ -482,11 +482,11 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
             rospy.sleep(1)
 
-    def draw_J(self, matrix, starting_index):
+    def draw_J(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_K(self, matrix, starting_index):
+    def draw_K(self, starting_index):
         #top left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -517,7 +517,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
             rospy.sleep(1)
 
-    def draw_M(self, matrix, starting_index):
+    def draw_M(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -537,7 +537,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
             
 
-    def draw_N(self, matrix, starting_index):
+    def draw_N(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -555,7 +555,7 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
             
 
-    def draw_O(self, matrix, starting_index):
+    def draw_O(self, starting_index):
         #bottom left corner
         x, y = starting_index
         #top of O
@@ -569,7 +569,7 @@ class MoveArm(object):
         for coord in coordinates:
             self.move_group_arm.go(self.matrix[coord[0]][coord[1]])
 
-    def draw_P(self, matrix, starting_index):
+    def draw_P(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -587,11 +587,11 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
 
 
-    def draw_Q(self, matrix, starting_index):
+    def draw_Q(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_R(self, matrix, starting_index):
+    def draw_R(self, starting_index):
         #bottom left corner
         x, y = starting_index
         for cell in range(0, 5):
@@ -612,11 +612,11 @@ class MoveArm(object):
             pose_position = self.matrix[x + cell][y - 3 + cell]
             self.move_group_arm.go(pose_position, wait=True)
 
-    def draw_S(self, matrix, starting_index):
+    def draw_S(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_T(self, matrix, starting_index):
+    def draw_T(self, starting_index):
         #bottom left corner
         x, y = starting_index
 
@@ -631,7 +631,7 @@ class MoveArm(object):
             pose_position = self.matrix[x + 1][y + cell]
             self.move_group_arm.go(pose_position, wait=True)
 
-    def draw_U(self, matrix, starting_index):
+    def draw_U(self, starting_index):
         #bottom left corner
         x, y = starting_index
 
@@ -651,23 +651,23 @@ class MoveArm(object):
             self.move_group_arm.go(pose_position, wait=True)
     
 
-    def draw_V(self, matrix, starting_index):
+    def draw_V(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_W(self, matrix, starting_index):
+    def draw_W(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_X(self, matrix, starting_index):
+    def draw_X(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_Y(self, matrix, starting_index):
+    def draw_Y(self, starting_index):
         print("letter drawing not implemented")
         pass
 
-    def draw_Z(self, matrix, starting_index):
+    def draw_Z(self, starting_index):
         print("letter drawing not implemented")
         pass
 
