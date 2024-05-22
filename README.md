@@ -46,6 +46,9 @@ Marker Attachment Instructions:
 ------------------------------
 Within the "3D_models" folder you will find a file called Robotics_Expo_Holder.gx, this is a print file for the components needed to print a expo-marker holder. The intention behind this print is to give more leeway with an OpenManipulator arm, as our team discovered that drawing on a planar space is incredibly challenging to fine-tune, and as such we created this to give us more room when drawing.
 
+![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/aef209ee-fddf-498e-af41-4da547360bd5)
+![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/58cae506-5e58-4220-8cdf-b728fcf514f5)
+
 Instructions:
 
 1. To print this model, you must have certification from the MADD Center. You can find their 3D printing exam on their Canvas page.
