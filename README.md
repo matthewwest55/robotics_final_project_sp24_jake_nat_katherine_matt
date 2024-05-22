@@ -18,7 +18,7 @@ Incorporating user-robot interaction is something we are interested in exploring
 
 Throughout this project, we were able to incorporate a computer vision model capable of recognizing handwriting on a white board with a high level of accuracy. We were also able to develop an inverse kinematics system that allowed for an OpenManipulator arm to draw on a white board without having a visual aid to guide it. We experimented with which combinations of letters were easiest and most accurate to both recognize and draw, and then utilized this downsized alphabet to construct a dictionary of words that can be guessed by a user.
 
-
+1`
 **Main components and how they fit together:**
 
 As previously mentioned, the two main components of this project are an inverse kinematics and a computer vision component. The inverse kinematics portion basically involved creating a modular way to write letters and draw a hangman on a whiteboard at a fixed location. The CV portion involved reading letters off of a whiteboard using a Convolutional Neural Net (CNN) trained using PyTorch on the EMNIST letter dataset. On seeing a letter, our code takes it as a guess, and through an instance of a game of hangman (developed as a class in `hangman.py`), makes some decisions about what to draw on the board (a letter, a hangman's leg, etc.). 
@@ -32,7 +32,10 @@ Robot Algorithms & Major Components:
 This file contains all of our core logic to play a game of hangman.
   1. `def __init__(self, wordlist, guesses_allowed):` initializes all components of the game hangman.
   2. `def choose_word(self, wordlist)` selects a word off of a predetermined word list to use for the game.
-  3. 
+  3. `def display_word(self)` prints the word to the terminal for players to see.
+  4. `def guess_letter(self, letter)` handles the guessing of the letter, indicating whether the guess was right or wrong, and drawing the body component accordingly.
+  5. `def is_game_over(self)` handles the state of the game, determining whether a game is over based on the number of remaining incorrect guesses.
+  6. `def index_check(self, letter)` checks where a correct letter is positioned within the word.
 
 `load_matrix.py`
 
@@ -41,9 +44,21 @@ This file contains the necessary code to load the calculated OpenManipulator joi
 `move_arm.py`
 
 This file contains all necessary code to draw the appropriate components of the game hangman. All functions operate on the provided `matrix` that serves as a plane for the arm to draw on. The individual functions are brokendown below:
+  1. `def __init__(self)` initializes all necessary components to move the OpenManipulator arm.
+  2. `def oriented(self)` indicates to players that the robot should be positioned parallel to the surface it will be drawing on.
+  3. `def guessed(self, data)` handles the terminal printouts regarding the state of the game, as well as handles either indicating a correct guess, or drawing a component of the hangman.
+  4. `def man_draw(self, remaining)` depending on the remaining amount of incorrect guesses, this function indicates which bodypart component to draw.
+  5. `def letter_index(self, num)`  this function indicates where in the word the guessed letter is located.
+  6. `def letter_draw(self, letter, mat_ind)` signals which letter to draw.
+  7. `def draw_galley(self, starting_index)` draws the galley.
+  8. `def draw_head(self, starting_index)`, `def draw_body(self, starting_index)`, `def draw_left_arm(self, starting_index)`, `def draw_right_arm(self, starting_index)`, `def draw_left_leg(self, starting_index)`, and `def draw_right_leg(self, starting_index)` draw the respective body components.
+  9. `def draw_A(self, starting_index)` -> `def draw_Z(self, starting_index)` indicate how to draw the indicated letter by noting which "cells" should be colored accoridng to a 5x4 square. Essentially, creating pixel letters.
 
 
 `demo_cam.py`
+
+This file contains all relevant information to process the computer vision side of the project. It initializes the alphabet, 
+
 
 `solve_state.py`
 
@@ -90,6 +105,10 @@ Deciding which system to use when developing an inverse kinematics system proved
 Computer Vision:
 
 The model we trained for letter recognition requires pretty good input conditions to read letters well off of a whiteboard. Knowing them now, these conditions are not prohibitive–we found multiple indoor locations that had enough ambient light for solid processing, and the camera-whiteboard setup described above produces consistent results–but it was quite a challenge to figure out. We also had some issues tuning the complexity of our model, and with overtraining. When the task is as simple (relative to other CV tasks) as classifying nicely-processed data, the overeager addition of many linear layers to our neural net created some very strange classification results: there aren't that many important "things" to pay attention to, and a simpler CNN structure reflects as much. Consequently, this model was very liable to overtrain: we found that after about ten epochs–a training set of about 20,000 images–we would see the network collapse and classify everything as a few letters.
+
+Hardware Issues:
+
+Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this severly crippled our final stretch.
 
 
 Future Work
