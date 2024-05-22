@@ -2,6 +2,6 @@
 
   <node pkg="final_project" type="demo_cam.py" name="cam_1"/>
 
-  <node pkg="final_project" type="move_arm.py" name="arm_1"/>
+  <node pkg="final_project" type="final_integration.py" name="arm_1"/>
 
 </launch>
