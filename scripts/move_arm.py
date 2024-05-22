@@ -97,16 +97,22 @@ class MoveArm(object):
         #overcorrection adjustments might also need to be made
         if remaining == 5:
             self.draw_head(self.matrix, (26, 9))
+            #(19,9) ->translated to center for Matt
         elif remaining == 4:
             self.draw_body(self.matrix, (26, 15))
+            #(19,15) ->translated to center for Matt
         elif remaining == 3:
             self.draw_left_arm(self.matrix, (26, 19))
+            #(19,19) ->translated to center for Matt
         elif remaining == 2:
             self.draw_right_arm(self.matrix, (26, 19))
+            #(19,19) ->translated to center for Matt
         elif remaining == 1:
             self.draw_left_leg(self.matrix, (26, 21))
+            #(19,21) ->translated to center for Matt
         else:
             self.draw_right_leg(self.matrix, (26, 21))
+            #(19,21) ->translated to center for Matt
 
     def letter_index(self, num):
         # num is a value in [0,4] (for 5-letter secret word)
@@ -235,6 +241,7 @@ class MoveArm(object):
     def draw_head(self, starting_index):
         #starting_index should be the top of the head
         #current starting index = (26, 9)
+        #(19,9) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
@@ -259,6 +266,7 @@ class MoveArm(object):
 
     def draw_body(self, starting_index):
         #current starting index = (26,15)
+        #(19,15) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
@@ -273,6 +281,7 @@ class MoveArm(object):
 
     def draw_left_arm(self, starting_index):
         #current starting index = (26, 19)
+        #(19,19) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
@@ -287,6 +296,7 @@ class MoveArm(object):
 
     def draw_right_arm(self, starting_index):
         #current starting index = (26, 19)
+        #(19,19) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
@@ -301,6 +311,7 @@ class MoveArm(object):
     
     def draw_left_leg(self, starting_index):
         #current starting index = (26, 21)
+        #(19,21) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
@@ -315,6 +326,7 @@ class MoveArm(object):
 
     def draw_right_leg(self, starting_index):
         #current starting index = (26, 21)
+        #(19,21) ->translated to center for Matt
         x, y = starting_index
 
         # Get setup
