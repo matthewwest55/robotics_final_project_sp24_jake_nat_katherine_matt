@@ -54,7 +54,7 @@ Deciding which system to use when developing an inverse kinematics system proved
 
       1. Use Gazebo + physical estimations and then mathematically determine where the arm should be positioned across an entire grid. This led to issues with accuracy and the math was hard to extrapolate since it was not a linear transformation
       2. Isolating a plane within Gazebo and then calculating the joint positions of the TB model, which led to issues with consistency between points. Just because a configuration was calculated didnt mean it was the optimal one.
-      3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions
+      3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions. Even with this we ran into issues regarding placement, size of non-linear offset as the software adjusted for the corners of the plane, and issues drawing point-to-point.
 
 Computer Vision:
 
@@ -68,5 +68,5 @@ In the future, we would hope to make this system more dynamic, so it could set i
 Takeaways
 --------------------------------
 * Just because you see two classification tasks as the same does not mean that your CV algorithm will. Reading letters off of photocopied paper is not the same as reading them from a live webcam off of a whiteboard. The best way to avoid this is to train your CV model on data you collect yourself. But we were able to close the gap by being particular with our input conditions.
-* Integrating two essentially separate projects requires more thorough communication than understanding the outputs of those seeparate parts. This is particularly true for two pieces of code running simultaneously, and the inevitable synchronicity issues that come with it.
+* Integrating two essentially separate projects requires more thorough communication than understanding the outputs of those separate parts. This is particularly true for two pieces of code running simultaneously, and the inevitable synchronicity issues that come with it.
 * Dealing with planar math embedded within an inverse kinematics problem is hard. Chosing simplifications to model in–say, instead of viewing the plane as a continuous surface and instead as something like a discrete dot-matrix, and assuming roughly continous behavior in the arm between those points–is very helpful for tackling these problems without a deep knowlege of the subject. 
