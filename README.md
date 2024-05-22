@@ -106,7 +106,7 @@ Instructions:
 
 Challenges
 --------------------------------
-Inverse Kinematics:
+**Inverse Kinematics:**
 
 Deciding which system to use when developing an inverse kinematics system proved incredibly challenging, and it took a few attempts before we developed a system that worked well. Notably, we had to create an IK system that worked without the use of a camera, and in order to best do this, we decided to standardize the distance the TB is stationed away from the wall. We tried three different approaches before deciding on our system:
 
@@ -114,11 +114,11 @@ Deciding which system to use when developing an inverse kinematics system proved
 2. Isolating a plane within Gazebo and then calculating the joint positions of the TB model, which led to issues with consistency between points. Just because a configuration was calculated didnt mean it was the optimal one.
 3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions. Even with this we ran into issues regarding placement, size of non-linear offset as the software adjusted for the corners of the plane, and issues drawing point-to-point.
 
-Computer Vision:
+**Computer Vision:**
 
 The model we trained for letter recognition requires pretty good input conditions to read letters well off of a whiteboard. Knowing them now, these conditions are not prohibitive–we found multiple indoor locations that had enough ambient light for solid processing, and the camera-whiteboard setup described above produces consistent results–but it was quite a challenge to figure out. We also had some issues tuning the complexity of our model, and with overtraining. When the task is as simple (relative to other CV tasks) as classifying nicely-processed data, the overeager addition of many linear layers to our neural net created some very strange classification results: there aren't that many important "things" to pay attention to, and a simpler CNN structure reflects as much. Consequently, this model was very liable to overtrain: we found that after about ten epochs–a training set of about 20,000 images–we would see the network collapse and classify everything as a few letters.
 
-Hardware Issues:
+**Hardware Issues:**
 
 Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this severly crippled our final stretch.
 
