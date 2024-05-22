@@ -26,7 +26,15 @@ As previously mentioned, the two main components of this project are an inverse 
 **System Architecture**
 ------------------------
 Robot Algorithms & Major Components:
-(function descriptions per component) TODO
+
+`hangman.py`
+
+`move_arm.py`
+
+`demo_cam.py`
+
+`solve_state.py`
+
 
 **ROS Node Diagram**
 ------------------
