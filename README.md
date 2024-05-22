@@ -27,6 +27,8 @@ As previously mentioned, the two main components of this project are an inverse 
 ------------------------
 Robot Algorithms & Major Components:
 
+This project focused on implementing two major components, Inverse Kinematics and Computer Vision. The portions of inverse kinematics were concentrated in the `load_matrix.py` and `move_arm.py` file, whereas the computer vision component was implemented within the `demo_cam.py` file. 
+
 ----
 
 `hangman.py`
