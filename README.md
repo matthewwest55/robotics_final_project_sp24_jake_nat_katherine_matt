@@ -52,6 +52,8 @@ This file contains all necessary code to draw the appropriate components of the 
 ------------------
 (insert image here) TODO
 
+Katherine is almost done (I promise sorry my other finals all fell onto today)
+
 **Execution**
 ---------------------
 
