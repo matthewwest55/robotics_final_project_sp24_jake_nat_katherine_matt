@@ -7,13 +7,6 @@ import moveit_commander
 import numpy as np
 import math
 
-from hangman import Hangman
-# from final_project.msg import GuessedLetter
-# from std_msgs.msg import String
-
-RIGHT = math.radians(-90)
-LEFT = math.radians(90)
-
 class MoveArm(object):
     def __init__(self):
         # initialize this node (get rid of this later)
@@ -52,41 +45,9 @@ class MoveArm(object):
 
         # Reset arm position
         # self.move_group_arm.go([0,0,0,0], wait=True)
-        # rospy.Subscriber('user_guess', GuessedLetter,  self.guessed)
-        # self.guess_pub = rospy.Publisher('need_guess', String, queue_size=1) 
-        # wordlist = ["ABODE", "BEARD", "BIKES", "STARK", "SHIFT", "FORKS", "DEPTH", "PRISM", "FRAME", "KNEAD", "DRINK", "BIOME", "THANK", "SPEAK", "POKER", "EMBED","MONTH","MOTIF","HARKS","NORTH"]
-        # self.game = Hangman()
-
-        # self.draw_galley()
-        # self.guess_pub.publish(String(data = "Gallows Done"))
-        print("Ready for guesses!")
-        self.game_over = False
-
+        
     def oriented(self):
         input("Orient now. Type any key to continue.")
-
-    def guessed(self, data):
-        if not self.game_over:
-            if not self.game.is_game_over():
-                print("Word:", self.game.display_word()) # to be deleted if the word drawing works
-                print("Attempts remaining:", self.game.remaining_guesses) # To be deleted if hangman works
-                print("New guess detected: ", data)
-                val = self.game.guess_letter(data) 
-                # Handles drawing behavior for correct and incorrect guesses (val == T/F respectively)
-                # For correct, could have multiple indices for given letter (hence loop) 
-                if val:
-                    letter_indices = self.game.index_check(data)
-                    for i in letter_indices:
-                        mat_ind = self.letter_index(i)
-                        self.letter_draw(data, mat_ind)
-                    self.guess_pub.publish(String(data = "Correct guess passed"))    
-                else:
-                    self.man_draw(self.game.remaining_guesses)
-                    self.guess_pub.publish(String(data = "Incorrect guess passed"))
-            else: 
-                self.game_over = True
-                print("Restart to play a new game.")
-    
 
     def man_draw(self, remaining):
         # Need to update matrix indices to values associated w each limb
