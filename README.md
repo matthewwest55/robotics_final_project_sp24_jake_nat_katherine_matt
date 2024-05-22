@@ -35,9 +35,11 @@ This file contains all of our core logic to play a game of hangman.
   3. 
 
 `load_matrix.py`
+
 This file contains the necessary code to load the calculated OpenManipulator joint matrix into an accessible form for use. It formats the matrix into a 40x40 grid that can be indexed in (x,y) format, representing a point within our drawing plane.
 
 `move_arm.py`
+
 This file contains all necessary code to draw the appropriate components of the game hangman. All functions operate on the provided `matrix` that serves as a plane for the arm to draw on. The individual functions are brokendown below:
 
 
