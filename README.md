@@ -28,7 +28,8 @@ As previously mentioned, the two main components of this project are an inverse 
 Robot Algorithms & Major Components:
 
 `hangman.py`
-This file cntains all of our core logic to play a game of hangman.
+
+This file contains all of our core logic to play a game of hangman.
   1. `def __init__(self, wordlist, guesses_allowed):` initializes all components of the game hangman.
   2. `def choose_word(self, wordlist)` selects a word off of a predetermined word list to use for the game.
   3. 
