@@ -66,7 +66,7 @@ This file contains all necessary code to draw the appropriate components of the 
 
 `demo_cam.py`
 
-This file contains all relevant information to process the computer vision side of the project. It initializes the alphabet, 
+This file contains all relevant information to process the computer vision side of the project.
 
 ----
 
