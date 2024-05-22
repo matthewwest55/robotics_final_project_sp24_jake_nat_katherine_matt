@@ -27,6 +27,8 @@ As previously mentioned, the two main components of this project are an inverse 
 ------------------------
 Robot Algorithms & Major Components:
 
+----
+
 `hangman.py`
 
 This file contains all of our core logic to play a game of hangman.
@@ -37,9 +39,13 @@ This file contains all of our core logic to play a game of hangman.
   5. `def is_game_over(self)` handles the state of the game, determining whether a game is over based on the number of remaining incorrect guesses.
   6. `def index_check(self, letter)` checks where a correct letter is positioned within the word.
 
+------
+
 `load_matrix.py`
 
 This file contains the necessary code to load the calculated OpenManipulator joint matrix into an accessible form for use. It formats the matrix into a 40x40 grid that can be indexed in (x,y) format, representing a point within our drawing plane.
+
+-----
 
 `move_arm.py`
 
@@ -54,14 +60,18 @@ This file contains all necessary code to draw the appropriate components of the 
   8. `def draw_head(self, starting_index)`, `def draw_body(self, starting_index)`, `def draw_left_arm(self, starting_index)`, `def draw_right_arm(self, starting_index)`, `def draw_left_leg(self, starting_index)`, and `def draw_right_leg(self, starting_index)` draw the respective body components.
   9. `def draw_A(self, starting_index)` -> `def draw_Z(self, starting_index)` indicate how to draw the indicated letter by noting which "cells" should be colored accoridng to a 5x4 square. Essentially, creating pixel letters.
 
+------
 
 `demo_cam.py`
 
 This file contains all relevant information to process the computer vision side of the project. It initializes the alphabet, 
 
+----
 
 `solve_state.py`
 
+
+-----
 
 **ROS Node Diagram**
 ------------------
