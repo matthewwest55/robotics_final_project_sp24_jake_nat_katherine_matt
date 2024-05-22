@@ -12,6 +12,7 @@ from torchvision.transforms import v2
 
 class GuessCam(object):
     def __init__(self):
+        rospy.init_node('guess_cam')
         self.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
                          'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 
                          'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -89,7 +90,7 @@ class GuessCam(object):
                 # Visualize processed image (for debugging)
                 
                 """plt.imshow(torch.squeeze(transformed_image), cmap='gray')
-                plt.savefig('image6-ringlight.png')
+                plt.savefig('example_image.png')
                 plt.show()"""
 
                 # Predict the letter
@@ -118,7 +119,9 @@ class GuessCam(object):
                         self.guesses.append(letter)
                         self.new_image = False
                         print(f"[!!!] Letter Guessed: {letter}.")
-                        self.guess_pub.publish(curr_count)
+                        msg = GuessedLetter()
+                        msg.letter = curr_guess
+                        self.guess_pub.publish(msg)
 
             rospy.sleep(.5)
                 
