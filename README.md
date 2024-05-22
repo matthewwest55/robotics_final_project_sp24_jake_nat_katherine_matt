@@ -61,9 +61,9 @@ Inverse Kinematics:
 
 Deciding which system to use when developing an inverse kinematics system proved incredibly challenging, and it took a few attempts before we developed a system that worked well. Notably, we had to create an IK system that worked without the use of a camera, and in order to best do this, we decided to standardize the distance the TB is stationed away from the wall. We tried three different approaches before deciding on our system:
 
-      1. Use Gazebo + physical estimations and then mathematically determine where the arm should be positioned across an entire grid. This led to issues with accuracy and the math was hard to extrapolate since it was not a linear transformation
-      2. Isolating a plane within Gazebo and then calculating the joint positions of the TB model, which led to issues with consistency between points. Just because a configuration was calculated didnt mean it was the optimal one.
-      3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions. Even with this we ran into issues regarding placement, size of non-linear offset as the software adjusted for the corners of the plane, and issues drawing point-to-point.
+1. Use Gazebo + physical estimations and then mathematically determine where the arm should be positioned across an entire grid. This led to issues with accuracy and the math was hard to extrapolate since it was not a linear transformation
+2. Isolating a plane within Gazebo and then calculating the joint positions of the TB model, which led to issues with consistency between points. Just because a configuration was calculated didnt mean it was the optimal one.
+3. We found a MATLAB extension that would calculate the ideal position for a given robotics arm and position in 3D coordinates. We then wrote a script that would calculate that positions across a grid, and adjusted as necessary to get a functioning, accurate matrix of positions. Even with this we ran into issues regarding placement, size of non-linear offset as the software adjusted for the corners of the plane, and issues drawing point-to-point.
 
 Computer Vision:
 
