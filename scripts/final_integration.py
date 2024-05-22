@@ -50,3 +50,7 @@ class FinalIntegration:
             else: 
                 self.game_over = True
                 print("Restart to play a new game.")
+
+if __name__ == '__main__':
+    complete_hangman = FinalIntegration()
+    rospy.spin()
