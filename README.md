@@ -21,24 +21,30 @@ Throughout this project, we were able to incorporate a computer vision model cap
 
 **Main components and how they fit together:**
 
+As previously mentioned, the two main components of this project are an inverse kinematics and a computer vision component. The inverse kinematics portion basically involved creating a modular way to write letters and draw a hangman on a whiteboard at a fixed location. The CV portion involved reading letters off of a whiteboard using a Convolutional Neural Net (CNN) trained using PyTorch on the EMNIST letter dataset. On seeing a letter, our code takes it as a guess, and through an instance of a game of hangman (developed as a class in `hangman.py`), makes some decisions about what to draw on the board (a letter, a hangman's leg, etc.). 
 
 **System Architecture**
 ------------------------
 Robot Algorithms & Major Components:
-(function descriptions per component)
+(function descriptions per component) TODO
 
 **ROS Node Diagram**
 ------------------
-(insert image here)
+(insert image here) TODO
 
 **Execution**
 ---------------------
-(Step-by-step instructions of how to run code)
 
+How to train CV model:
+You do not need to train your own letter recognition CV model to run this code, as we have already included one in the repo. However, if you want to train and save your own Pytorch model, you can just execute the `model.py` file in the scripts folder using Python3. Some key dependencies you may need to install (using pip) are the `Deeplake` and `Pytorch` libraries.
+
+How to run Rospy code:
+* On the machine which is running Roscore, set the webcam up, across from the board that you will write your letters on. It works best to tune your "letter writing area" simply by bringing up the webcam and centering an example letter in your feed. Your webcam may be different if it has a different resolution, but on a 2023 Macbook you want to center a 3.5 inch square box 22 inches away from the cam. Ensure there is light source directly overhead the whiteboard.
+* Run the action.launch file in the launch folder, using the command `roslaunch *package_name* action.launch`. The game outputs appear in the terminal of the machine you're running the code on.
 
 Marker Attachment Instructions:
 ------------------------------
-Within the "Models" folder you will find a 
+Within the "Models" folder you will find a TODO
 
 Challenges
 --------------------------------
@@ -52,9 +58,15 @@ Deciding which system to use when developing an inverse kinematics system proved
 
 Computer Vision:
 
+The model we trained for letter recognition requires pretty good input conditions to read letters well off of a whiteboard. Knowing them now, these conditions are not prohibitive–we found multiple indoor locations that had enough ambient light for solid processing, and the camera-whiteboard setup described above produces consistent results–but it was quite a challenge to figure out. We also had some issues tuning the complexity of our model, and with overtraining. When the task is as simple (relative to other CV tasks) as classifying nicely-processed data, the overeager addition of many linear layers to our neural net created some very strange classification results: there aren't that many important "things" to pay attention to, and a simpler CNN structure reflects as much. Consequently, this model was very liable to overtrain: we found that after about ten epochs–a training set of about 20,000 images–we would see the network collapse and classify everything as a few letters.
+
+
 Future Work
 --------------------------------
-In the future, we would hope to make this system more dynamic, so it could set its distance from a parallel plane (or white board) and run the calculations internally to decide what the OpenManipulator arm needs to draw where. We would also like to incorporate more overall fuctionality, such as indicating on the board which letters have already been guessed, or being able to adjust to words of varying lengths.
+In the future, we would hope to make this system more dynamic, so it could set its distance from a parallel plane (or white board) and run the calculations internally to decide what the OpenManipulator arm needs to draw where. We would also like to incorporate more overall fuctionality, such as indicating on the board which letters have already been guessed, or being able to adjust to words of varying lengths. 
 
 Takeaways
 --------------------------------
+* Just because you see two classification tasks as the same does not mean that your CV algorithm will. Reading letters off of photocopied paper is not the same as reading them from a live webcam off of a whiteboard. The best way to avoid this is to train your CV model on data you collect yourself. But we were able to close the gap by being particular with our input conditions.
+* Integrating two essentially separate projects requires more thorough communication than understanding the outputs of those seeparate parts. This is particularly true for two pieces of code running simultaneously, and the inevitable synchronicity issues that come with it.
+* Dealing with planar math embedded within an inverse kinematics problem is hard. Chosing simplifications to model in–say, instead of viewing the plane as a continuous surface and instead as something like a discrete dot-matrix, and assuming roughly continous behavior in the arm between those points–is very helpful for tackling these problems without a deep knowlege of the subject. 
