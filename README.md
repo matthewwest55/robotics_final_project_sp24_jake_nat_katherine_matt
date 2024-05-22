@@ -44,7 +44,15 @@ How to run Rospy code:
 
 Marker Attachment Instructions:
 ------------------------------
-Within the "Models" folder you will find a TODO
+Within the "3D_models" folder you will find a file called Robotics_Expo_Holder.gx, this is a print file for the components needed to print a expo-marker holder. The intention behind this print is to give more leeway with an OpenManipulator arm, as our team discovered that drawing on a planar space is incredibly challenging to fine-tune, and as such we created this to give us more room when drawing.
+
+Instructions:
+
+1. To print this model, you must have certification from the MADD Center. You can find their 3D printing exam on their Canvas page.
+2. This print is intended for the FlashForge Adventurer 4's, and the print time is about 10 hours (without complications). Fair warning, this did take 4 days to get a successful print, you must supervise your print at all times, and you are not allowed toprint overnight. This is essentially a full-day commitment, so make sure you have the time set aside or multiple people take shifts watching the print.
+3. Once the model has been printed, make sure to carefully peel it off of the baseplate and remove the supports.
+4. Use superglue to construct the model as shown in the photograph, and ensure that everything is applied evenly so it can be gripped well.
+5. Experiment with looping various strengths and lengths of rubberbands to get the desired amount of marker wiggle room.
 
 Challenges
 --------------------------------
