@@ -6,11 +6,6 @@ class Hangman(object):
         self.secret_word = self.choose_word(wordlist)
         print(self.secret_word)
         self.remaining_guesses = guesses_allowed
-        while not self.is_game_over():
-            print("Word:", self.display_word())
-            print("Attempts remaining:", self.remaining_guesses)
-            guess = input("Enter a letter: ")
-            self.guess_letter(guess)
 
     def choose_word(self, wordlist):
         return random.choice(wordlist)

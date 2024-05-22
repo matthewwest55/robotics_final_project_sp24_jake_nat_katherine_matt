@@ -45,6 +45,7 @@ class MoveArm(object):
 
         # Reset arm position
         # self.move_group_arm.go([0,0,0,0], wait=True)
+        self.drawing = False
         
     def oriented(self):
         input("Orient now. Type any key to continue.")
@@ -56,24 +57,33 @@ class MoveArm(object):
         #NOTE: these values can be updated depending on where the arm draws best, and each "placeholder"
         #should be translated the same if we do choose to move the gallows or body.
         #overcorrection adjustments might also need to be made
+        self.drawing = True
+        
         if remaining == 5:
+            print("Drawing head")
             self.draw_head((26, 9))
             #(19,9) ->translated to center for Matt
         elif remaining == 4:
+            print("Drawing Body")
             self.draw_body((26, 15))
             #(19,15) ->translated to center for Matt
         elif remaining == 3:
+            print("Drawing Left Arm")
             self.draw_left_arm((26, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 2:
+            print("Drawing Right Arm")
             self.draw_right_arm((26, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 1:
+            print("Drawing Left Leg")
             self.draw_left_leg((26, 21))
             #(19,21) ->translated to center for Matt
         else:
+            print("Drawing Right Leg")
             self.draw_right_leg((26, 21))
             #(19,21) ->translated to center for Matt
+        self.drawing = False
 
     def letter_index(self, num):
         # num is a value in [0,4] (for 5-letter secret word)
@@ -98,6 +108,8 @@ class MoveArm(object):
     
     
     def letter_draw(self, letter, mat_ind):
+        self.drawing = True
+        
         if letter == "A":
             self.draw_A(mat_ind)
         elif letter == "B":
@@ -151,6 +163,7 @@ class MoveArm(object):
         # elif letter == "Z":
         #     self.draw_Z(mat_ind)
 
+        self.drawing = False
 
 
     # ALL Gallows, Letter, and Person Drawing Code is Below
@@ -163,6 +176,8 @@ class MoveArm(object):
         #for entire matrix, assume (0,0) is the top left corner
         #starting_index is a tuple bottom left corner of the galley
         #matrix is the matrix of robot arm positions
+
+        self.drawing = True
 
         #this portion draws the galley base
         x, y = starting_index
@@ -197,6 +212,7 @@ class MoveArm(object):
 
         rospy.sleep(2)
         self.reset_arm()
+        self.drawing = False
 
     #this portion of code is responsible for drawing the body components
     def draw_head(self, starting_index):

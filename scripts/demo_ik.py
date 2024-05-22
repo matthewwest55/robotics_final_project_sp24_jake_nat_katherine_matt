@@ -15,7 +15,7 @@ class DemoIK:
 
         wordlist = ["ABODE", "BEARD", "BIKES", "STARK", "SHIFT", "FORKS", "DEPTH", "PRISM", "FRAME", "KNEAD", "DRINK", "BIOME", "THANK", "SPEAK", "POKER", "EMBED","MONTH","MOTIF","HARKS","NORTH"]
         self.game = Hangman(wordlist, 6)
-        self.arm_commands_node.draw_galley()
+        self.arm_commands_node.draw_galley((15, 10))
 
         # Sleep to let everything setup
         rospy.sleep(2)
@@ -50,3 +50,7 @@ if __name__ == '__main__':
         next_letter = input()
         print(next_letter)
         demo_ik.guessed(next_letter)
+        
+        # Wait for drawing to complete before doing the next guess
+        while demo_ik.arm_commands_node.drawing:
+            rospy.sleep(1)
