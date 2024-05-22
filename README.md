@@ -28,6 +28,10 @@ As previously mentioned, the two main components of this project are an inverse 
 Robot Algorithms & Major Components:
 
 `hangman.py`
+This file cntains all of our core logic to play a game of hangman.
+  1. `def __init__(self, wordlist, guesses_allowed):` initializes all components of the game hangman.
+  2. `def choose_word(self, wordlist)` selects a word off of a predetermined word list to use for the game.
+  3. 
 
 `load_matrix.py`
 This file contains the necessary code to load the calculated OpenManipulator joint matrix into an accessible form for use. It formats the matrix into a 40x40 grid that can be indexed in (x,y) format, representing a point within our drawing plane.
