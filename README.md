@@ -81,7 +81,7 @@ This file is the CV training model that trains a model using the EMNST dataset u
 ----
 
 `solve_state.py`
-
+This file demonstrates all aspects of inverse kinematics within our project as a demo, should we need to showcase this particular aspect.
 
 -----
 
