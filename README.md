@@ -26,7 +26,7 @@ As previously mentioned, the two main components of this project are an inverse 
 ------------------------
 **Robot Algorithms & Major Components:**
 
-This project focused on implementing two major components, Inverse Kinematics and Computer Vision. The portions of inverse kinematics were concentrated in the `load_matrix.py` and `move_arm.py` file, whereas the computer vision component was implemented within the `demo_cam.py` file. 
+This project focused on implementing two major components, Inverse Kinematics and Computer Vision. The portions of inverse kinematics were concentrated in the `move_arm.py` file, whereas the computer vision component was implemented within the `demo_cam.py` file. 
 
 ----
 
@@ -41,10 +41,6 @@ This file contains all of our core logic to play a game of hangman.
   6. `def index_check(self, letter)` checks where a correct letter is positioned within the word.
 
 ------
-
-`load_matrix.py`
-
-This file contains the necessary code to load the calculated OpenManipulator joint matrix into an accessible form for use. It formats the matrix into a 40x40 grid that can be indexed in (x,y) format, representing a point within our drawing plane.
 
 -----
 
