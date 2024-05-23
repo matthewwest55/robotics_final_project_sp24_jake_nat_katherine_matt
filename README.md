@@ -90,9 +90,9 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 **Demonstrations**
 -----------------
 
-[![Computer Vision Demonstration](https://img.youtube.com/vi/SRnfSBk77FA&t=1s/0.jpg)](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
+[![Computer Vision Demonstration](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
 
-[![Inverse Kinematics Demonstration](https://img.youtube.com/vi/fAJZnIKUa_o/0.jpg)](https://www.youtube.com/watch?v=fAJZnIKUa_o)
+[![Inverse Kinematics Demonstration](https://www.youtube.com/watch?v=fAJZnIKUa_o)
 
 
 **Execution**
