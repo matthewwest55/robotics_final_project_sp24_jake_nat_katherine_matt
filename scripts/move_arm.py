@@ -38,13 +38,13 @@ class MoveArm(object):
 
         rospy.sleep(2)
 
-        # self.reset_arm()
         # rospy.sleep(5)
         # self.open_gripper()
         self.close_gripper()
 
         # Reset arm position
         # self.move_group_arm.go([0,0,0,0], wait=True)
+        self.reset_arm()
         self.drawing = False
         
     def oriented(self):
@@ -61,28 +61,30 @@ class MoveArm(object):
         
         if remaining == 5:
             print("Drawing head")
-            self.draw_head((26, 9))
+            self.draw_head((19, 19))
             #(19,9) ->translated to center for Matt
         elif remaining == 4:
             print("Drawing Body")
-            self.draw_body((26, 15))
+            self.draw_body((19, 18))
             #(19,15) ->translated to center for Matt
         elif remaining == 3:
             print("Drawing Left Arm")
-            self.draw_left_arm((26, 19))
+            self.draw_left_arm((19, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 2:
             print("Drawing Right Arm")
-            self.draw_right_arm((26, 19))
+            self.draw_right_arm((19, 19))
             #(19,19) ->translated to center for Matt
         elif remaining == 1:
             print("Drawing Left Leg")
-            self.draw_left_leg((26, 21))
+            self.draw_left_leg((19, 20))
             #(19,21) ->translated to center for Matt
         else:
             print("Drawing Right Leg")
-            self.draw_right_leg((26, 21))
+            self.draw_right_leg((19, 20))
             #(19,21) ->translated to center for Matt
+        
+        self.reset_arm()
         self.drawing = False
 
     def letter_index(self, num):
@@ -163,6 +165,7 @@ class MoveArm(object):
         # elif letter == "Z":
         #     self.draw_Z(mat_ind)
 
+        self.reset_arm()
         self.drawing = False
 
 
@@ -205,7 +208,7 @@ class MoveArm(object):
             rospy.sleep(0.5)
 
         # #this portion draws the hanging portion of the galley
-        for cell in range(0, 6):
+        for cell in range(0, 4):
             pose_position = self.matrix[x + 5][y + 5 + cell]
             self.move_group_arm.go(pose_position, wait=True)
             rospy.sleep(0.5)
@@ -227,7 +230,7 @@ class MoveArm(object):
         rospy.sleep(3)
 
         # REMOVE LATER
-        self.oriented()
+        # self.oriented()
 
         coordinates = [(x + dx, y + dy) for dx, dy in [
             (0, 0), (-1, 0), (-2, 1), (-3, 2),
@@ -292,11 +295,11 @@ class MoveArm(object):
         x, y = starting_index
 
         # Get setup
-        pose_position = self.matrix[x + 1][y + 12]
+        pose_position = self.matrix[x][y + 12]
         self.move_group_arm.go(pose_position, wait=True)
         rospy.sleep(3)
 
-        for cell in range(0, 3):
+        for cell in range(0, 4):
             pose_position = self.matrix[x + 1 - cell][y + 12 + cell]
             self.move_group_arm.go(pose_position, wait=True)
             rospy.sleep(1)
@@ -307,11 +310,11 @@ class MoveArm(object):
         x, y = starting_index
 
         # Get setup
-        pose_position = self.matrix[x - 1][y + 12]
+        pose_position = self.matrix[x][y + 12]
         self.move_group_arm.go(pose_position, wait=True)
         rospy.sleep(3)
 
-        for cell in range(0, 3):
+        for cell in range(0, 4):
             pose_position = self.matrix[x - 1 + cell][y + 12 + cell]
             self.move_group_arm.go(pose_position, wait=True)
             rospy.sleep(1)
@@ -703,25 +706,9 @@ class MoveArm(object):
 
     def reset_arm(self):
         # left/right, whole arm up/down, forearm up/down, gripper angle
-        self.move_group_arm.go([0, math.radians(-70), math.radians(70), 0], wait=True)
+        self.move_group_arm.go([0, math.radians(-70), math.radians(55), 0], wait=True)
         self.move_group_arm.stop()
         rospy.sleep(5)
-
-    def arm_up(self):
-        self.move_group_arm.go([RIGHT, math.radians(-20), math.radians(-50), 0], wait=True)
-        self.move_group_arm.stop()
-        self.whole_arm = math.radians(-20)
-        self.forearm = math.radians(-50)
-
-    def arm_down(self):
-        # self.move_group_arm.go([RIGHT, math.radians(55), math.radians(-50), 0], wait=True)
-        self.move_group_arm.go([RIGHT, math.radians(-20), math.radians(30), 0], wait=True)
-        self.move_group_arm.stop()
-
-    def arm_back(self):
-        # self.move_group_arm.go([RIGHT, math.radians(55), math.radians(-50), 0], wait=True)
-        self.move_group_arm.go([RIGHT, math.radians(-10), math.radians(-10), 0], wait=True)
-        self.move_group_arm.stop()
 
     def close_gripper(self):
         gripper_joint_close = [0.011, 0.011]

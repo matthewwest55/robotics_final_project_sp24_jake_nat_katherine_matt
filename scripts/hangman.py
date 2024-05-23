@@ -4,7 +4,7 @@ class Hangman(object):
     def __init__(self, wordlist, guesses_allowed):
         self.guesses = []
         self.secret_word = self.choose_word(wordlist)
-        print(self.secret_word)
+        # print(self.secret_word)
         self.remaining_guesses = guesses_allowed
 
     def choose_word(self, wordlist):
@@ -23,6 +23,7 @@ class Hangman(object):
         letter = letter.upper()
         if letter in self.guesses:
             print("Already Guessed.")
+            return None
         elif letter in self.secret_word:
             print("Good guess!")
             # repeat guesses already handled by cam file
