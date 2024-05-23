@@ -87,6 +87,11 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 ![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/f035bfaa-8f2f-46fc-8924-0d3ec1ab8a1c)
 
 
+**Demonstrations**
+------------------
+
+![video](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
+
 **Execution**
 ---------------------
 
