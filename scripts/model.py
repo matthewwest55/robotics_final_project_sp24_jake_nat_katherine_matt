@@ -15,6 +15,8 @@ import deeplake
 
 # Model parameters
 class CNN(nn.Module):
+    # these methods describe layers in CNN
+    # 2 convolutional, 1 pool, 3 linear
     def __init__(self):
         super(CNN, self).__init__()
         self.conv1 = nn.Conv2d(1, 32, kernel_size=5, padding=2)
@@ -48,7 +50,7 @@ if __name__ == "__main__":
       v2.Normalize((0.1307,), (0.3081,)) 
   ])
   
-  # Deeplake transform
+  # Deeplake transform: what deeplake data is getting passed through for standardization
   training_transform = v2.Compose([
       v2.ToPILImage(), # Just based on deeplake guidance w PyTorch
       v2.ToImage(),
@@ -77,15 +79,17 @@ if __name__ == "__main__":
   lossf = nn.CrossEntropyLoss()
   optimizer = optim.Adam(model.parameters(), lr=0.001)
   
-  # Training
+  # Training: find 10 or less epochs work best
   num_epochs = 10
   for epoch in range(num_epochs):
       running_loss = 0.0
       for i, data in enumerate(train_dataloader, 0):
           inputs, labels = data
+          # so that we just have array
           labels = torch.flatten(labels) - 1
           #print(inputs.shape)
-          #print(labels)      
+          #print(labels)   
+          # pretty boilerplate training code
           optimizer.zero_grad()
           outputs = model(inputs)
           loss = lossf(outputs, labels)
@@ -93,11 +97,12 @@ if __name__ == "__main__":
           optimizer.step()
           running_loss += loss.item()
           if (i+1) % 100 == 0:
+              # Tracks current status of training
               print(f'Epoch [{ epoch + 1 }/{num_epochs}], Step [{ i + 1 }/{ len(train_dataloader) }], Loss: { running_loss/100:.4f}')
               running_loss = 0.0
 
   
-  # Testing
+  # Testing on deeplake test set
   correct = 0
   total = 0
   with torch.no_grad():
