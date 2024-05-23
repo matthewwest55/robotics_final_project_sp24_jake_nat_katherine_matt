@@ -5,6 +5,8 @@ import rospy
 from move_arm import MoveArm
 from hangman import Hangman
 
+# DEMO FILE, DOES NOT NEED DEMO_CAM TO COMMUNICATE WITH
+
 class DemoIK:
     def __init__(self):
         # Start rospy node
