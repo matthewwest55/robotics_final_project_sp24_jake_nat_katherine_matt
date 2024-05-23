@@ -88,7 +88,7 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 **ROS Node Diagram**
 ------------------
 
-![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/bae4c2fe-b99f-409f-b81d-dc8de6ab6614)
+![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/f035bfaa-8f2f-46fc-8924-0d3ec1ab8a1c)
 
 
 **Execution**
