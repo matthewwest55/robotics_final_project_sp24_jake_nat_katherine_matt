@@ -105,7 +105,7 @@ class GuessCam(object):
                     curr_guess = letter
                 #print(f"[{curr_count}/7] Prediction: {letter}.")
 
-                if (curr_count == 7) and not (curr_guess in self.guesses):
+                if (curr_count == 9) and not (curr_guess in self.guesses):
                     if self.first:
                         curr_count = 1
                     else:
