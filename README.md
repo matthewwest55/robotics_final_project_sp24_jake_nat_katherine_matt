@@ -24,7 +24,7 @@ As previously mentioned, the two main components of this project are an inverse 
 
 **System Architecture**
 ------------------------
-Robot Algorithms & Major Components:
+**Robot Algorithms & Major Components:**
 
 This project focused on implementing two major components, Inverse Kinematics and Computer Vision. The portions of inverse kinematics were concentrated in the `load_matrix.py` and `move_arm.py` file, whereas the computer vision component was implemented within the `demo_cam.py` file. 
 
@@ -94,10 +94,10 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 **Execution**
 ---------------------
 
-How to train CV model:
+**How to train CV model:**
 You do not need to train your own letter recognition CV model to run this code, as we have already included one in the repo. However, if you want to train and save your own Pytorch model, you can just execute the `model.py` file in the scripts folder using Python3. Some key dependencies you may need to install (using pip) are the `Deeplake` and `Pytorch` libraries.
 
-How to run Rospy code:
+**How to run Rospy code:**
 * On the machine which is running Roscore, set the webcam up, across from the board that you will write your letters on. It works best to tune your "letter writing area" simply by bringing up the webcam and centering an example letter in your feed. Your webcam may be different if it has a different resolution, but on a 2023 Macbook you want to center a 3.5 inch square box 22 inches away from the cam. Ensure there is light source directly overhead the whiteboard.
 * Run the action.launch file in the launch folder, using the command `roslaunch *package_name* action.launch`. The game outputs appear in the terminal of the machine you're running the code on.
 
@@ -106,7 +106,7 @@ Marker Attachment Instructions:
 Within the "3D_models" folder you will find a file called Robotics_Expo_Holder.gx, this is a print file for the components needed to print a expo-marker holder. The intention behind this print is to give more leeway with an OpenManipulator arm, as our team discovered that drawing on a planar space is incredibly challenging to fine-tune, and as such we created this to give us more room when drawing.
 
 
-Instructions:
+**Instructions:**
 
 1. To print this model, you must have certification from the MADD Center. You can find their 3D printing exam on their Canvas page.
 2. This print is intended for the FlashForge Adventurer 4's, and the print time is about 10 hours (without complications). Fair warning, this did take 4 days to get a successful print, you must supervise your print at all times, and you are not allowed to print overnight. This is essentially a full-day commitment, so make sure you have the time set aside or multiple people take shifts watching the print.
