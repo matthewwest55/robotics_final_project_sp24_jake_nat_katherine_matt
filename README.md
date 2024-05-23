@@ -130,7 +130,7 @@ The model we trained for letter recognition requires pretty good input condition
 
 **Hardware Issues:**
 
-Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this severly crippled our final stretch.
+Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this forced us to reassess how we wanted to move forward.
 
 
 Future Work
