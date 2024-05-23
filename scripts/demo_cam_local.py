@@ -23,9 +23,12 @@ class GuessCam(object):
     def action_check(self, data):
         time.sleep(1) # TODO: Delet4e] 
         self.new_image = True
-    
+
+    # Threshold is camera dependent. .45 is solid on Macs. .38 is solid
+    # Asus Zephyrus machines. Modify between these values or slightly 
+    # under/above as needed. 
     @staticmethod
-    def gs_threshold(x, threshold=0.38):
+    def gs_threshold(x, threshold=0.45):
         x = torch.where(x <= threshold, torch.zeros_like(x), x)
         return x
     
