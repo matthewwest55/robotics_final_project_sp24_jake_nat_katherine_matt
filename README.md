@@ -90,7 +90,7 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 **Demonstrations**
 ------------------
 
-![video](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
+[![Watch the video](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)]
 
 **Execution**
 ---------------------
