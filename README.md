@@ -18,7 +18,6 @@ Incorporating user-robot interaction is something we are interested in exploring
 
 Throughout this project, we were able to incorporate a computer vision model capable of recognizing handwriting on a white board with a high level of accuracy. We were also able to develop an inverse kinematics system that allowed for an OpenManipulator arm to draw on a white board without having a visual aid to guide it. We experimented with which combinations of letters were easiest and most accurate to both recognize and draw, and then utilized this downsized alphabet to construct a dictionary of words that can be guessed by a user.
 
-1`
 **Main components and how they fit together:**
 
 As previously mentioned, the two main components of this project are an inverse kinematics and a computer vision component. The inverse kinematics portion basically involved creating a modular way to write letters and draw a hangman on a whiteboard at a fixed location. The CV portion involved reading letters off of a whiteboard using a Convolutional Neural Net (CNN) trained using PyTorch on the EMNIST letter dataset. On seeing a letter, our code takes it as a guess, and through an instance of a game of hangman (developed as a class in `hangman.py`), makes some decisions about what to draw on the board (a letter, a hangman's leg, etc.). 
