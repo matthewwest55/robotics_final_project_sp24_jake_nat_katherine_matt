@@ -18,7 +18,6 @@ Incorporating user-robot interaction is something we are interested in exploring
 
 Throughout this project, we were able to incorporate a computer vision model capable of recognizing handwriting on a white board with a high level of accuracy. We were also able to develop an inverse kinematics system that allowed for an OpenManipulator arm to draw on a white board without having a visual aid to guide it. We experimented with which combinations of letters were easiest and most accurate to both recognize and draw, and then utilized this downsized alphabet to construct a dictionary of words that can be guessed by a user.
 
-1`
 **Main components and how they fit together:**
 
 As previously mentioned, the two main components of this project are an inverse kinematics and a computer vision component. The inverse kinematics portion basically involved creating a modular way to write letters and draw a hangman on a whiteboard at a fixed location. The CV portion involved reading letters off of a whiteboard using a Convolutional Neural Net (CNN) trained using PyTorch on the EMNIST letter dataset. On seeing a letter, our code takes it as a guess, and through an instance of a game of hangman (developed as a class in `hangman.py`), makes some decisions about what to draw on the board (a letter, a hangman's leg, etc.). 
@@ -66,7 +65,18 @@ This file contains all necessary code to draw the appropriate components of the 
 
 `demo_cam.py`
 
-This file contains all relevant information to process the computer vision side of the project.
+This file contains all code necessary to read images off the whiteboard via openCV and determine what letters (or lack of) are in that image via the computer vision dataset with Pytorch. Functions and their purpose are listed below:
+1. `def init(self)` This node initializes necessary components such as the ROS node, the alphabet as a list, an empty list that will hold all the previously guessed letters, the cv2 image, and the rospy publish and subscribers.
+2. `def action_check(self, data)` This node will verify if we need to grab a new letter. It is a callback function that relies on the `need_guess` subscriber from ROS. If there is a tangible value, that is, any non-None type object, then it will notify the code that we are ready to get a new letter. Else, it simply rospy.sleeps in a loop.
+3. `def gs_threshold(x, threshold=0.38)` This node ensures that the lighter shades of pixels discovered within an image taken from the camera are darkened. That way only the written letter, which is grayscaled and inverted alongside the rest of the image, is the only readable object in the image. 
+4. `def run(self)` This node runs the code. That is, it will rospy sleep in a loop if the code does not specify that we need a new guess from the callback function or it will search a given captured image frame from openCV that is processed and matched to a letter given by the CV model and will publish it to the `move_arm.py` rospy node for processing either as an incorrect guess (in which a hangman body part is drawn) or if it is correct (in which a letter is drawn).
+
+----
+
+`model.py`
+This file is the CV training model that trains a model using the EMNST dataset using the pytorch and deeplake libraries. This file only needs to be run once and is independent of ROS. As such, you should run this file alone and using python3 rather than using rosrun. 
+1. `def init(self)` Initializes necessary modules for the training model.
+2. `def forward(self, x)` Describes how the optimization of the model happens.
 
 ----
 
@@ -77,9 +87,9 @@ This file contains all relevant information to process the computer vision side 
 
 **ROS Node Diagram**
 ------------------
-(insert image here) TODO
 
-Katherine is almost done (I promise sorry my other finals all fell onto today)
+![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/bae4c2fe-b99f-409f-b81d-dc8de6ab6614)
+
 
 **Execution**
 ---------------------
@@ -120,7 +130,7 @@ The model we trained for letter recognition requires pretty good input condition
 
 **Hardware Issues:**
 
-Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this severly crippled our final stretch.
+Unfortunately, at 6:00pm on Wed, May 22nd (the evening before the final project), our SSD that was running native linux completely died. This drive was how we were going to run the demo, and the code for CV is configured to the camera's resolution from Jake's laptop and also needs to be native. NoMachine did not function with it from what we've tested with, and it essentially crippled our testing pipeline. We came up with some stopgap solutions, essentially in which we would act as the rostopic publisher, but this forced us to reassess how we wanted to move forward.
 
 
 Future Work
