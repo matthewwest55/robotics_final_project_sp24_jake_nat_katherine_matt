@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from model import CNN
 from torchvision.transforms import v2
- 
+
+# ROS DEPENDENT CODE 
 
 class GuessCam(object):
     def __init__(self):
