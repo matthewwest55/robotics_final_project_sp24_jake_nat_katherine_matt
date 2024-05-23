@@ -87,9 +87,9 @@ This file is the CV training model that trains a model using the EMNST dataset u
 
 **ROS Node Diagram**
 ------------------
-(insert image here) TODO
 
-Katherine is almost done (I promise sorry my other finals all fell onto today)
+![image](https://github.com/matthewwest55/robotics_final_project_sp24_jake_nat_katherine_matt/assets/116113433/bae4c2fe-b99f-409f-b81d-dc8de6ab6614)
+
 
 **Execution**
 ---------------------
