@@ -7,6 +7,8 @@ from hangman import Hangman
 from final_project.msg import GuessedLetter
 from std_msgs.msg import String
 
+# RELIES ON DEMO_CAM ROS TOPICS
+
 class FinalIntegration:
     def __init__(self):
         # Start rospy node
