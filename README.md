@@ -76,8 +76,8 @@ This file is the CV training model that trains a model using the EMNST dataset u
 
 ----
 
-`solve_state.py`
-This file demonstrates all aspects of inverse kinematics within our project as a demo, should we need to showcase this particular aspect.
+`permuteRobot.m`
+This file runs the MatLab library for generating our joint positions to get the marker onto the board (which we consider a plane.) See `correct_size_2.csv` for an example of the output. 
 
 -----
 
@@ -90,9 +90,9 @@ This file demonstrates all aspects of inverse kinematics within our project as a
 **Demonstrations**
 -----------------
 
-![Computer Vision Demonstration](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
+[![Computer Vision Demonstration]](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
 
-![Inverse Kinematics Demonstration](https://www.youtube.com/watch?v=fAJZnIKUa_o)
+[![Inverse Kinematics Demonstration]](https://www.youtube.com/watch?v=fAJZnIKUa_o)
 
 
 **Execution**
