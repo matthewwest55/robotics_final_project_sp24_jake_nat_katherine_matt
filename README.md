@@ -90,9 +90,9 @@ This file runs the MatLab library for generating our joint positions to get the 
 **Demonstrations**
 -----------------
 
-[![Computer Vision Demonstration]](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
+[Computer Vision Demonstration](https://www.youtube.com/watch?v=SRnfSBk77FA&t=1s)
 
-[![Inverse Kinematics Demonstration]](https://www.youtube.com/watch?v=fAJZnIKUa_o)
+[Inverse Kinematics Demonstration](https://www.youtube.com/watch?v=fAJZnIKUa_o)
 
 
 **Execution**
