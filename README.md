@@ -70,6 +70,7 @@ This file contains all code necessary to read images off the whiteboard via open
 ----
 
 `model.py`
+
 This file is the CV training model that trains a model using the EMNST dataset using the pytorch and deeplake libraries. This file only needs to be run once and is independent of ROS. As such, you should run this file alone and using python3 rather than using rosrun. 
 1. `def init(self)` Initializes necessary modules for the training model.
 2. `def forward(self, x)` Describes how the optimization of the model happens.
@@ -77,6 +78,7 @@ This file is the CV training model that trains a model using the EMNST dataset u
 ----
 
 `permuteRobot.m`
+
 This file runs the MatLab library for generating our joint positions to get the marker onto the board (which we consider a plane.) See `correct_size_2.csv` for an example of the output. Note that in this file, we had to adjust the plane values because the end effector was not the same as in real-life (since the model we used in MatLab did not have the marker attached.) To deal with this, we adjusted off-center values proportional to how far they were from the center.
 
 -----
